@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,12 +32,24 @@
             </p>
           </div>
         </div>
-        <div
-          class="site-header__support"
-          id="support-row"
-          aria-label="Feature support status"
-        >
-          <!-- Populated by app.js -->
+        <div class="site-header__right">
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            type="button"
+            aria-label="Switch to dark mode"
+            title="Toggle light / dark theme"
+          >
+            <span class="theme-toggle__icon" aria-hidden="true"></span>
+            <span class="theme-toggle__label">Dark</span>
+          </button>
+          <div
+            class="site-header__support"
+            id="support-row"
+            aria-label="Feature support status"
+          >
+            <!-- Populated by app.js -->
+          </div>
         </div>
       </div>
     </header>

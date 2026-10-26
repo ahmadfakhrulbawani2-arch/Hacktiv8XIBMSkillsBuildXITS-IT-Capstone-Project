@@ -1128,7 +1128,64 @@ function initNavHighlight() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   § 8 · INIT
+   § 8 · THEME TOGGLE
+   ══════════════════════════════════════════════════════════════════════════ */
+
+function initThemeToggle() {
+  var html   = document.documentElement;
+  var btn    = document.getElementById("theme-toggle");
+  var label  = btn && btn.querySelector(".theme-toggle__label");
+  var STORE  = "hairline-theme";
+
+  // Determine starting theme:
+  // 1. localStorage wins (user has toggled before)
+  // 2. fall back to OS preference
+  // 3. default to "light"
+  function getSystemPref() {
+    return window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem(STORE); } catch(e) {}
+  var initial = saved || getSystemPref();
+  applyTheme(initial, false);
+
+  if (!btn) return;
+
+  btn.addEventListener("click", function () {
+    var current = html.getAttribute("data-theme") || "light";
+    applyTheme(current === "dark" ? "light" : "dark", true);
+  });
+
+  // Also follow OS changes in real time when no manual override is stored
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
+      var manual = null;
+      try { manual = localStorage.getItem(STORE); } catch(e) {}
+      if (!manual) {
+        applyTheme(e.matches ? "dark" : "light", false);
+      }
+    });
+  }
+
+  function applyTheme(theme, persist) {
+    html.setAttribute("data-theme", theme);
+    if (persist) {
+      try { localStorage.setItem(STORE, theme); } catch(e) {}
+    }
+    if (btn && label) {
+      var isDark = theme === "dark";
+      label.textContent    = isDark ? "Light" : "Dark";
+      btn.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+    }
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   § 9 · INIT
    ══════════════════════════════════════════════════════════════════════════ */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1157,4 +1214,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 8. Reading progress bar (scroll-driven)
   injectReadingProgressBar();
+
+  // 9. Theme toggle
+  initThemeToggle();
 });
