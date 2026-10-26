@@ -1,34 +1,31 @@
-/* ═══════════════════════════════════════════════════════════════════════════
-   HAIRLINE — CSS Platform Playground
-   styles.css
-   ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ── 1. DESIGN TOKENS ──────────────────────────────────────────────────── */
+
+
 
 :root {
-  /* ── Light theme (default) ── */
-  --clr-bg: #f3f1ea; /* warm bone */
-  --clr-bg-alt: #e8e6dc; /* slightly deeper surface */
+  
+  --clr-bg: #f3f1ea; 
+  --clr-bg-alt: #e8e6dc; 
   --clr-panel: #ffffff;
   --clr-ink: #111111;
-  --clr-ink-2: #333333; /* secondary text */
+  --clr-ink-2: #333333; 
   --clr-muted: #666666;
   --clr-border: #111111;
-  --clr-border-sub: #cccccc; /* subtler divider */
+  --clr-border-sub: #cccccc; 
 
-  /* Accent = white — used as highlight against dark ink surfaces */
+  
   --clr-accent: #ffffff;
-  --clr-accent-ink: #111111; /* text on accent bg */
+  --clr-accent-ink: #111111; 
 
-  /* Secondary accents */
-  --clr-lime: #c8ff00; /* acid lime — use sparingly */
-  --clr-blue: #1b37ff; /* ultramarine — only inside demos */
+  
+  --clr-lime: #c8ff00; 
+  --clr-blue: #1b37ff; 
 
-  /* Code block surface */
+  
   --clr-code-bg: #fafaf8;
   --clr-code-ink: #111111;
 
-  /* Syntax highlight (light) */
+  
   --hl-selector: #1b37ff;
   --hl-prop: #b04800;
   --hl-value: #1b7b1b;
@@ -40,14 +37,14 @@
   --hl-punct: #555555;
   --hl-number: #b04800;
 
-  /* Scroll-bar accent */
+  
   --clr-scrollbar: #bbbbbb;
 
-  /* Typography */
+  
   --font-sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", "Courier New", monospace;
 
-  /* Scale (8-pt grid) */
+  
   --sp-1: 4px;
   --sp-2: 8px;
   --sp-3: 12px;
@@ -59,7 +56,7 @@
   --sp-12: 48px;
   --sp-16: 64px;
 
-  /* Borders & shadows — derived from tokens */
+  
   --border: 1.5px solid var(--clr-border);
   --border-thin: 1px solid var(--clr-border);
   --border-sub: 1px solid var(--clr-border-sub);
@@ -67,46 +64,46 @@
   --shadow-lg: 6px 6px 0 var(--clr-ink);
   --shadow-accent: 4px 4px 0 var(--clr-accent);
 
-  /* No radius */
+  
   --radius: 0;
 
-  /* Layout */
+  
   --nav-width: 220px;
   --header-height: 80px;
   --content-max: 900px;
 }
 
-/* ── Dark theme ─────────────────────────────────────────────────────────── */
-/* Applied via data-theme="dark" on <html> (JS toggle) OR when OS is dark    */
-/* and the user hasn't yet toggled (OS preference bootstraps the attribute).  */
+
+
+
 
 [data-theme="dark"],
 [data-theme="dark"] :root {
-  --clr-bg: #0e0e0c; /* near-black with a warm tint */
-  --clr-bg-alt: #181816; /* slightly lighter surface */
-  --clr-panel: #1c1c19; /* card / panel surface */
-  --clr-ink: #e8e5dc; /* warm off-white — main text */
-  --clr-ink-2: #b8b5ac; /* secondary text */
-  --clr-muted: #8a8880; /* muted / placeholder — AA-compliant on dark bg */
-  --clr-border: #3a3835; /* visible but not glaring border */
-  --clr-border-sub: #504e45; /* subtle divider — darker than panel */
+  --clr-bg: #0e0e0c; 
+  --clr-bg-alt: #181816; 
+  --clr-panel: #1c1c19; 
+  --clr-ink: #e8e5dc; 
+  --clr-ink-2: #b8b5ac; 
+  --clr-muted: #8a8880; 
+  --clr-border: #3a3835; 
+  --clr-border-sub: #504e45; 
 
-  /* Accent: stays white — used as foreground on ink-coloured surfaces */
+  
   --clr-accent: #ffffff;
   --clr-accent-ink: #0e0e0c;
 
-  --clr-lime: #b8ed00; /* slightly muted lime for dark bg */
-  --clr-blue: #6b8fff; /* lightened ultramarine */
+  --clr-lime: #b8ed00; 
+  --clr-blue: #6b8fff; 
 
   --clr-code-bg: #131310;
   --clr-code-ink: #d4d1c8;
 
-  /* Syntax highlight — WCAG AA on #131310 code bg */
-  --hl-selector: #7b9fff; /* periwinkle blue */
-  --hl-prop: #ff9944; /* warm orange */
-  --hl-value: #68c868; /* mid green */
-  --hl-comment: #5a5850; /* dark grey, clearly muted */
-  --hl-keyword: #cc72dd; /* soft purple */
+  
+  --hl-selector: #7b9fff; 
+  --hl-prop: #ff9944; 
+  --hl-value: #68c868; 
+  --hl-comment: #5a5850; 
+  --hl-keyword: #cc72dd; 
   --hl-tag: #7b9fff;
   --hl-attr: #ff9944;
   --hl-string: #68c868;
@@ -115,19 +112,18 @@
 
   --clr-scrollbar: #3a3835;
 
-  /* Shadows: use a semi-transparent dark, not the ink text colour,
-     so they read as depth against dark panel backgrounds */
+  
   --shadow: 4px 4px 0 rgba(0, 0, 0, 0.7);
   --shadow-lg: 6px 6px 0 rgba(0, 0, 0, 0.7);
   --shadow-accent: 4px 4px 0 var(--clr-accent);
 
-  /* Borders derived from the new tokens */
+  
   --border: 1.5px solid var(--clr-border);
   --border-thin: 1px solid var(--clr-border);
   --border-sub: 1px solid var(--clr-border-sub);
 }
 
-/* ── 2. RESET & BASE ────────────────────────────────────────────────────── */
+
 
 *,
 *::before,
@@ -190,7 +186,7 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
-/* ── 3. SKIP LINK ───────────────────────────────────────────────────────── */
+
 
 .skip-link {
   position: absolute;
@@ -211,7 +207,7 @@ textarea:focus-visible {
   top: var(--sp-4);
 }
 
-/* ── 4. SITE HEADER ─────────────────────────────────────────────────────── */
+
 
 .site-header {
   position: sticky;
@@ -238,7 +234,7 @@ textarea:focus-visible {
   gap: var(--sp-4);
 }
 
-/* Registration mark decoration */
+
 .site-header__registration {
   display: inline-block;
   width: 36px;
@@ -283,8 +279,8 @@ textarea:focus-visible {
   margin-top: 2px;
 }
 
-/* Support chips */
-/* Right-side header cluster: toggle + chips */
+
+
 .site-header__right {
   display: flex;
   align-items: center;
@@ -299,7 +295,7 @@ textarea:focus-visible {
   align-items: center;
 }
 
-/* ── Theme toggle button ──────────────────────────────────────────────────── */
+
 
 .theme-toggle {
   display: inline-flex;
@@ -320,7 +316,7 @@ textarea:focus-visible {
     background 0.15s,
     color 0.15s,
     border-color 0.15s;
-  /* chamfer one corner for character */
+  
   clip-path: polygon(6px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 6px);
 }
 .theme-toggle:hover {
@@ -328,7 +324,7 @@ textarea:focus-visible {
   border-color: var(--clr-muted);
 }
 
-/* Sun/moon icon built from CSS — no SVG, no emoji */
+
 .theme-toggle__icon {
   position: relative;
   display: inline-block;
@@ -338,7 +334,7 @@ textarea:focus-visible {
   color: var(--clr-bg);
 }
 
-/* Light mode: show circle (sun) */
+
 .theme-toggle__icon::before {
   content: "";
   position: absolute;
@@ -348,7 +344,7 @@ textarea:focus-visible {
   transition: transform 0.2s;
 }
 
-/* Dark mode: show crescent (clip circle) */
+
 [data-theme="dark"] .theme-toggle__icon::before {
   transform: translate(3px, -1px);
   box-shadow: -3px 2px 0 var(--clr-bg);
@@ -385,7 +381,7 @@ textarea:focus-visible {
   content: "✗";
 }
 
-/* ── 5. SITE LAYOUT ─────────────────────────────────────────────────────── */
+
 
 .site-layout {
   display: grid;
@@ -399,7 +395,7 @@ textarea:focus-visible {
   }
 }
 
-/* ── 6. NAV RAIL ────────────────────────────────────────────────────────── */
+
 
 .nav-rail {
   border-right: var(--border);
@@ -483,14 +479,14 @@ textarea:focus-visible {
   }
 }
 
-/* ── 7. SITE MAIN ───────────────────────────────────────────────────────── */
+
 
 .site-main {
   padding: 0;
   position: relative;
 }
 
-/* Crosshair decorations */
+
 .deco-cross {
   position: absolute;
   display: block;
@@ -526,7 +522,7 @@ textarea:focus-visible {
   right: var(--sp-4);
 }
 
-/* ── 8. FEATURE GROUP ───────────────────────────────────────────────────── */
+
 
 .feature-group {
   border-bottom: var(--border);
@@ -595,7 +591,7 @@ textarea:focus-visible {
   }
 }
 
-/* ── 9. SPECIMEN ────────────────────────────────────────────────────────── */
+
 
 .specimen {
   border: var(--border);
@@ -605,7 +601,7 @@ textarea:focus-visible {
   container-name: specimen;
 }
 
-/* Alternate shadow uses the ink tone so it always contrasts */
+
 .specimen:nth-child(even) {
   box-shadow: var(--shadow-lg);
 }
@@ -651,7 +647,7 @@ textarea:focus-visible {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   background: var(--clr-lime);
-  color: #111111; /* lime always uses ink, even in dark mode */
+  color: #111111; 
 }
 
 .support-note {
@@ -663,7 +659,7 @@ textarea:focus-visible {
   border-style: dashed;
 }
 
-/* Demo stage */
+
 .specimen__stage {
   padding: var(--sp-8) var(--sp-6);
   min-height: 180px;
@@ -676,13 +672,13 @@ textarea:focus-visible {
   position: relative;
 }
 
-/* Full-width stages */
+
 .specimen--full-stage .specimen__stage {
   padding: 0;
   min-height: 240px;
 }
 
-/* ── 10. CODE TABS ──────────────────────────────────────────────────────── */
+
 
 .specimen__tabs {
   border-bottom: none;
@@ -778,8 +774,8 @@ textarea:focus-visible {
   max-height: 320px;
 }
 
-/* ── 11. SYNTAX HIGHLIGHT COLOURS ──────────────────────────────────────── */
-/* All colours driven by tokens — auto-switch between light/dark */
+
+
 
 .hl-selector {
   color: var(--hl-selector);
@@ -814,7 +810,7 @@ textarea:focus-visible {
   color: var(--hl-number);
 }
 
-/* ── 12. PLAYGROUND SECTION ─────────────────────────────────────────────── */
+
 
 .playground-section {
   padding: var(--sp-8);
@@ -903,7 +899,7 @@ textarea:focus-visible {
   box-shadow: var(--shadow);
 }
 
-/* Share button: inverted — ink bg, accent (white) text */
+
 .pg-btn--share {
   background: var(--clr-ink);
   color: var(--clr-bg);
@@ -947,10 +943,10 @@ textarea:focus-visible {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 500;
-  color: var(--clr-bg); /* white label on ink header */
+  color: var(--clr-bg); 
 }
 
-/* Editor wrap: stacking context for textarea + highlight overlay */
+
 .pg-editor-wrap {
   position: relative;
   height: 240px;
@@ -958,7 +954,7 @@ textarea:focus-visible {
   background: var(--clr-code-bg);
 }
 
-/* The highlighted <pre> sits behind the textarea, pixel-identical layout */
+
 .pg-highlight {
   position: absolute;
   inset: 0;
@@ -969,13 +965,13 @@ textarea:focus-visible {
   line-height: 1.7;
   white-space: pre-wrap;
   word-break: break-all;
-  overflow: hidden; /* pre scrolls via the textarea, not itself */
+  overflow: hidden; 
   pointer-events: none;
   tab-size: 2;
   color: var(--clr-code-ink);
   background: transparent;
   border: none;
-  /* Must not clip content that aligns with textarea */
+  
   box-sizing: border-box;
 }
 
@@ -989,8 +985,8 @@ textarea:focus-visible {
   font-size: 0.72rem;
   line-height: 1.7;
   border: none;
-  background: transparent; /* see-through — highlight pre shows behind */
-  color: transparent; /* hide the text; caret remains visible */
+  background: transparent; 
+  color: transparent; 
   caret-color: var(--clr-code-ink);
   resize: none;
   display: block;
@@ -1033,7 +1029,7 @@ textarea:focus-visible {
   height: 360px;
   border: none;
   display: block;
-  background: #ffffff; /* preview iframe always white — it's an isolated doc */
+  background: #ffffff; 
 }
 
 .pg-error-strip {
@@ -1046,7 +1042,7 @@ textarea:focus-visible {
   color: #cc0000;
 }
 
-/* ── 13. SITE FOOTER ────────────────────────────────────────────────────── */
+
 
 .site-footer {
   border-top: var(--border);
@@ -1070,7 +1066,7 @@ textarea:focus-visible {
   font-size: 0.8rem;
 }
 
-/* ── 14. SCROLL-DRIVEN READING PROGRESS ─────────────────────────────────── */
+
 
 @supports (animation-timeline: scroll()) {
   .reading-progress {
@@ -1096,7 +1092,7 @@ textarea:focus-visible {
   }
 }
 
-/* ── 15. UTILITY CLASSES ────────────────────────────────────────────────── */
+
 
 .visually-hidden {
   position: absolute;
@@ -1110,7 +1106,7 @@ textarea:focus-visible {
   border: 0;
 }
 
-/* Chamfered corner effect */
+
 .chamfer {
   clip-path: polygon(
     8px 0%,
@@ -1122,7 +1118,7 @@ textarea:focus-visible {
   );
 }
 
-/* Hard-offset box */
+
 .hard-box {
   border: var(--border);
   box-shadow: var(--shadow);

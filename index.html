@@ -19,7 +19,6 @@
   <body>
     <a href="#main" class="skip-link">Skip to main content</a>
 
-    <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
     <header class="site-header" role="banner">
       <div class="site-header__inner">
         <div class="site-header__brand">
@@ -48,31 +47,24 @@
             id="support-row"
             aria-label="Feature support status"
           >
-            <!-- Populated by app.js -->
           </div>
         </div>
       </div>
     </header>
 
-    <!-- ═══════════════════════════════ BODY LAYOUT ════════════════════════════ -->
     <div class="site-layout">
-      <!-- NAV RAIL -->
       <nav class="nav-rail" id="nav-rail" aria-label="Example index">
         <div class="nav-rail__inner">
           <div class="nav-rail__label" aria-hidden="true">INDEX</div>
           <div id="nav-groups">
-            <!-- Populated by app.js -->
           </div>
         </div>
       </nav>
 
-      <!-- MAIN CONTENT -->
       <main id="main" class="site-main">
-        <!-- CROSS MARKS decoration -->
         <span class="deco-cross deco-cross--tl" aria-hidden="true"></span>
         <span class="deco-cross deco-cross--tr" aria-hidden="true"></span>
 
-        <!-- PLAYGROUND -->
         <section
           class="playground-section"
           id="playground"
@@ -117,7 +109,11 @@
                 <span class="pg-pane__lang">HTML</span>
               </div>
               <div class="pg-editor-wrap">
-                <pre class="pg-highlight" id="pg-highlight-html" aria-hidden="true"></pre>
+                <pre
+                  class="pg-highlight"
+                  id="pg-highlight-html"
+                  aria-hidden="true"
+                ></pre>
                 <textarea
                   id="pg-html"
                   class="pg-editor"
@@ -133,7 +129,11 @@
                 <span class="pg-pane__lang">CSS</span>
               </div>
               <div class="pg-editor-wrap">
-                <pre class="pg-highlight" id="pg-highlight-css" aria-hidden="true"></pre>
+                <pre
+                  class="pg-highlight"
+                  id="pg-highlight-css"
+                  aria-hidden="true"
+                ></pre>
                 <textarea
                   id="pg-css"
                   class="pg-editor"
@@ -149,7 +149,11 @@
                 <span class="pg-pane__lang">JS</span>
               </div>
               <div class="pg-editor-wrap">
-                <pre class="pg-highlight" id="pg-highlight-js" aria-hidden="true"></pre>
+                <pre
+                  class="pg-highlight"
+                  id="pg-highlight-js"
+                  aria-hidden="true"
+                ></pre>
                 <textarea
                   id="pg-js"
                   class="pg-editor"
@@ -184,12 +188,9 @@
           ></div>
         </section>
 
-        <!-- EXAMPLES -->
         <div id="examples-root">
-          <!-- Populated by app.js -->
         </div>
 
-        <!-- FOOTER -->
         <footer class="site-footer" role="contentinfo">
           <div class="site-footer__inner">
             <span class="site-footer__mark" aria-hidden="true">◼</span>
@@ -201,7 +202,6 @@
         </footer>
       </main>
     </div>
-    <!-- /.site-layout -->
 
     <script src="app.js"></script>
   </body>

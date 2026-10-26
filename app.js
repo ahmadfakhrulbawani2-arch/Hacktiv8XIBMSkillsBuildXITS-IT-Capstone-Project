@@ -1,29 +1,6 @@
-/* ═══════════════════════════════════════════════════════════════════════════
-   HAIRLINE — CSS Platform Playground  ·  app.js
-   ───────────────────────────────────────────────────────────────────────────
-   SECTIONS
-     1. EXAMPLES DATA
-     2. RENDER ENGINE
-     3. SYNTAX HIGHLIGHTER
-     4. TABS & COPY
-     5. PLAYGROUND
-     6. SUPPORT DETECTION & FEATURE CHIPS
-     7. NAV RAIL
-     8. INIT
-   ═══════════════════════════════════════════════════════════════════════════ */
+
 
 "use strict";
-
-/* ══════════════════════════════════════════════════════════════════════════
-   § 1 · EXAMPLES DATA
-   ══════════════════════════════════════════════════════════════════════════
-   Each example is defined once. The demo is rendered from these same strings.
-   Rules:
-     - No backticks inside the template strings below (use single/double quotes)
-     - No ${ sequences inside html/css/js string values
-     - js: '// No JavaScript needed'  when the example has no JS
-     - Prefix every class and custom property with the example id
-*/
 
 const GROUPS = [
   {
@@ -32,7 +9,7 @@ const GROUPS = [
     title: "Scroll-Driven Animations",
     desc: "@scroll-timeline  ·  animation-timeline  ·  animation-range",
     examples: [
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex01",
         num: "01",
@@ -44,7 +21,7 @@ const GROUPS = [
         css: ".ex01-stage {\n  position: relative;\n  overflow: hidden;\n}\n\n.ex01-bar-wrap {\n  position: sticky;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 4px;\n  background: #e5e3dc;\n  z-index: 1;\n}\n\n@supports (animation-timeline: scroll()) {\n  .ex01-bar {\n    height: 100%;\n    background: #1B37FF;\n    transform-origin: left;\n    transform: scaleX(0);\n    animation: ex01-grow linear;\n    animation-timeline: scroll(nearest block);\n  }\n}\n\n@supports not (animation-timeline: scroll()) {\n  .ex01-bar { display: none; }\n}\n\n@keyframes ex01-grow {\n  from { transform: scaleX(0); }\n  to   { transform: scaleX(1); }\n}\n\n.ex01-page-content {\n  height: 220px;\n  overflow-y: auto;\n  padding: 12px 16px;\n  scroll-behavior: smooth;\n}\n\n.ex01-para {\n  margin-bottom: 12px;\n  font-size: 0.85rem;\n  line-height: 1.6;\n  color: #333;\n}",
         js: "// No JavaScript needed",
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex02",
         num: "02",
@@ -56,7 +33,7 @@ const GROUPS = [
         css: '.ex02-list {\n  list-style: none;\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n  height: 260px;\n  overflow-y: auto;\n  padding: 12px 16px;\n}\n\n.ex02-item {\n  padding: 14px 18px;\n  border: 1.5px solid #111;\n  background: #fff;\n  font-size: 0.85rem;\n  font-family: "IBM Plex Mono", monospace;\n  font-weight: 500;\n  letter-spacing: 0.04em;\n}\n\n@supports (animation-timeline: view()) {\n  .ex02-item {\n    opacity: 0;\n    transform: translateY(16px);\n    animation: ex02-reveal linear both;\n    animation-timeline: view(block);\n    animation-range: entry 0% entry 35%;\n  }\n}\n\n@supports not (animation-timeline: view()) {\n  .ex02-item { opacity: 1; transform: none; }\n}\n\n@keyframes ex02-reveal {\n  from { opacity: 0; transform: translateY(16px); }\n  to   { opacity: 1; transform: translateY(0);   }\n}',
         js: "// No JavaScript needed",
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex03",
         num: "03",
@@ -68,7 +45,7 @@ const GROUPS = [
         css: '.ex03-scene {\n  position: relative;\n  height: 260px;\n  overflow: hidden;\n  background: #F3F1EA;\n  border: 1.5px solid #111;\n}\n\n.ex03-scroll-area {\n  position: relative;\n  z-index: 3;\n  height: 100%;\n  overflow-y: auto;\n  padding: 16px 20px;\n  display: flex;\n  flex-direction: column;\n  gap: 40px;\n}\n\n.ex03-scroll-area p {\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.75rem;\n  letter-spacing: 0.08em;\n  opacity: 0.6;\n}\n\n.ex03-layer {\n  position: absolute;\n  inset: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-family: "IBM Plex Mono", monospace;\n  font-weight: 500;\n  font-size: 4rem;\n  letter-spacing: 0.12em;\n  pointer-events: none;\n  user-select: none;\n}\n\n.ex03-layer--back  { color: rgba(27,55,255,0.06);  font-size: 6rem;  z-index: 0; }\n.ex03-layer--mid   { color: rgba(27,55,255,0.10);  font-size: 3rem;  z-index: 1; }\n.ex03-layer--front { color: rgba(27,55,255,0.18);  font-size: 1.6rem; z-index: 2; }\n\n@supports (animation-timeline: scroll()) {\n  .ex03-layer--back {\n    animation: ex03-parallax-back linear both;\n    animation-timeline: scroll(.ex03-scroll-area block);\n  }\n  .ex03-layer--mid {\n    animation: ex03-parallax-mid linear both;\n    animation-timeline: scroll(.ex03-scroll-area block);\n  }\n  .ex03-layer--front {\n    animation: ex03-parallax-front linear both;\n    animation-timeline: scroll(.ex03-scroll-area block);\n  }\n}\n\n@keyframes ex03-parallax-back  { to { transform: translateY(-60px); } }\n@keyframes ex03-parallax-mid   { to { transform: translateY(-30px); } }\n@keyframes ex03-parallax-front { to { transform: translateY(-12px); } }',
         js: "// No JavaScript needed",
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex04",
         num: "04",
@@ -83,14 +60,14 @@ const GROUPS = [
     ],
   },
 
-  /* ════════════════════════════════════════════════════════════════════════ */
+  
   {
     letter: "B",
     id: "property",
     title: "@property",
     desc: "@property  ·  typed custom properties  ·  animatable tokens",
     examples: [
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex05",
         num: "05",
@@ -102,7 +79,7 @@ const GROUPS = [
         css: '@supports (syntax: "<angle>") {\n  @property --ex05-angle {\n    syntax: "<angle>";\n    inherits: false;\n    initial-value: 0deg;\n  }\n}\n\n.ex05-card {\n  --ex05-angle: 0deg;\n  width: 160px;\n  height: 120px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: conic-gradient(from var(--ex05-angle), #1B37FF 0%, #C8FF00 30%, #111 60%, #1B37FF 100%);\n  padding: 3px;\n  cursor: pointer;\n  transition: --ex05-angle 0.8s ease;\n}\n\n.ex05-card:hover {\n  --ex05-angle: 360deg;\n}\n\n@supports not (syntax: "<angle>") {\n  .ex05-card {\n    border: 3px solid #1B37FF;\n    background: none;\n    padding: 3px;\n  }\n}\n\n.ex05-inner {\n  background: #fff;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.ex05-label {\n  background: #fff;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.8rem;\n  letter-spacing: 0.08em;\n  font-weight: 500;\n  color: #111;\n}',
         js: "// No JavaScript needed",
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex06",
         num: "06",
@@ -114,7 +91,7 @@ const GROUPS = [
         css: '@supports (syntax: "<integer>") {\n  @property --ex06-n {\n    syntax: "<integer>";\n    inherits: false;\n    initial-value: 0;\n  }\n}\n\n.ex06-demo {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 20px;\n}\n\n.ex06-counter {\n  --ex06-n: 0;\n  font-size: 4rem;\n  font-weight: 900;\n  font-family: "IBM Plex Mono", monospace;\n  color: #1B37FF;\n  counter-reset: ex06-cnt var(--ex06-n);\n  display: block;\n  line-height: 1;\n  min-width: 160px;\n  text-align: center;\n}\n\n@supports (syntax: "<integer>") {\n  .ex06-counter::after {\n    content: counter(ex06-cnt);\n    color: #111;\n    font-size: 4rem;\n  }\n  .ex06-counter { color: transparent; }\n\n  .ex06-counter.is-running {\n    animation: ex06-count 1.4s ease-out forwards;\n  }\n\n  @keyframes ex06-count {\n    from { --ex06-n: 0; }\n    to   { --ex06-n: 100; }\n  }\n}\n\n.ex06-btn {\n  padding: 10px 28px;\n  background: #111;\n  color: #C8FF00;\n  border: 1.5px solid #111;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.75rem;\n  letter-spacing: 0.1em;\n  text-transform: uppercase;\n  cursor: pointer;\n}\n.ex06-btn:hover { background: #1B37FF; border-color: #1B37FF; color: #fff; }',
         js: 'var btn = document.getElementById("ex06-trigger");\nvar counter = document.querySelector(".ex06-counter");\nif (btn && counter) {\n  btn.addEventListener("click", function() {\n    counter.classList.remove("is-running");\n    void counter.offsetWidth;\n    counter.classList.add("is-running");\n  });\n}',
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex07",
         num: "07",
@@ -125,7 +102,7 @@ const GROUPS = [
         css: '@supports (syntax: "<percentage>") {\n  @property --ex07-p {\n    syntax: "<percentage>";\n    inherits: false;\n    initial-value: 50%;\n  }\n}\n\n.ex07-demo {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 20px;\n}\n\n.ex07-ring-wrap {\n  position: relative;\n  width: 140px;\n  height: 140px;\n}\n\n.ex07-ring {\n  --ex07-p: 50%;\n  width: 140px;\n  height: 140px;\n  border-radius: 50%;\n  background: conic-gradient(#1B37FF 0% var(--ex07-p), #e5e3dc var(--ex07-p) 100%);\n  transition: --ex07-p 0.15s ease;\n}\n\n@supports (syntax: "<percentage>") {\n  .ex07-ring {\n    -webkit-mask: radial-gradient(circle, transparent 52px, #000 52px);\n    mask: radial-gradient(circle, transparent 52px, #000 52px);\n  }\n}\n\n@supports not (syntax: "<percentage>") {\n  .ex07-ring {\n    border-radius: 50%;\n    background: none;\n    border: 12px solid #1B37FF;\n  }\n}\n\n.ex07-ring-label {\n  position: absolute;\n  inset: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 1.1rem;\n  font-weight: 700;\n  color: #111;\n  pointer-events: none;\n}\n\n.ex07-range-label {\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.7rem;\n  text-transform: uppercase;\n  letter-spacing: 0.08em;\n  color: #555;\n}\n\n.ex07-range {\n  width: 200px;\n  accent-color: #1B37FF;\n  cursor: pointer;\n}',
         js: 'var ring  = document.getElementById("ex07-ring");\nvar label = document.getElementById("ex07-ring-val");\nvar range = document.getElementById("ex07-range");\nif (ring && label && range) {\n  range.addEventListener("input", function() {\n    var v = range.value;\n    ring.style.setProperty("--ex07-p", v + "%");\n    label.textContent = v + "%";\n  });\n}',
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex08",
         num: "08",
@@ -140,14 +117,14 @@ const GROUPS = [
     ],
   },
 
-  /* ════════════════════════════════════════════════════════════════════════ */
+  
   {
     letter: "C",
     id: "container",
     title: "Container Queries",
     desc: "@container  ·  cqi / cqw  ·  style()",
     examples: [
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex09",
         num: "09",
@@ -159,7 +136,7 @@ const GROUPS = [
         css: '.ex09-wrapper {\n  container-type: inline-size;\n  container-name: ex09-wrap;\n  width: 100%;\n}\n\n.ex09-card {\n  border: 1.5px solid #111;\n  background: #fff;\n  box-shadow: 4px 4px 0 #111;\n  display: flex;\n  gap: 0;\n  flex-direction: column;\n}\n\n@container ex09-wrap (min-width: 420px) {\n  .ex09-card {\n    flex-direction: row;\n    align-items: stretch;\n  }\n  .ex09-thumb {\n    width: 160px;\n    flex-shrink: 0;\n  }\n}\n\n.ex09-thumb {\n  width: 100%;\n  height: 120px;\n  background: repeating-linear-gradient(45deg, #1B37FF, #1B37FF 2px, transparent 2px, transparent 12px);\n  background-color: #F3F1EA;\n  border-bottom: 1.5px solid #111;\n}\n\n@container ex09-wrap (min-width: 420px) {\n  .ex09-thumb {\n    height: auto;\n    border-bottom: none;\n    border-right: 1.5px solid #111;\n  }\n}\n\n.ex09-body { padding: 18px 20px; }\n\n.ex09-eyebrow {\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.62rem;\n  text-transform: uppercase;\n  letter-spacing: 0.12em;\n  color: #1B37FF;\n  margin-bottom: 6px;\n}\n\n.ex09-title {\n  font-size: 1rem;\n  font-weight: 700;\n  margin-bottom: 8px;\n}\n\n.ex09-desc { font-size: 0.8rem; line-height: 1.5; color: #555; }',
         js: "// No JavaScript needed",
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex10",
         num: "10",
@@ -171,7 +148,7 @@ const GROUPS = [
         css: ".ex10-wrapper {\n  container-type: inline-size;\n  container-name: ex10-wrap;\n  width: 100%;\n}\n\n.ex10-card {\n  border: 1.5px solid #111;\n  background: #fff;\n  padding: 24px;\n  box-shadow: 4px 4px 0 #111;\n}\n\n.ex10-heading {\n  font-size: clamp(1.2rem, 6cqi, 3rem);\n  font-weight: 900;\n  letter-spacing: -0.03em;\n  line-height: 1.05;\n  margin-bottom: 12px;\n}\n\n@supports not (font-size: 1cqi) {\n  .ex10-heading { font-size: clamp(1.2rem, 4vw, 3rem); }\n}\n\n.ex10-body {\n  font-size: clamp(0.75rem, 2cqi, 1rem);\n  color: #555;\n  line-height: 1.6;\n  max-width: 40ch;\n}\n\n@supports not (font-size: 1cqi) {\n  .ex10-body { font-size: 0.85rem; }\n}",
         js: "// No JavaScript needed",
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex11",
         num: "11",
@@ -183,7 +160,7 @@ const GROUPS = [
         css: '.ex11-wrapper {\n  container-type: inline-size;\n  container-name: ex11-wrap;\n  width: 100%;\n}\n\n.ex11-toolbar {\n  display: flex;\n  align-items: center;\n  gap: 2px;\n  border: 1.5px solid #111;\n  padding: 6px;\n  background: #F3F1EA;\n}\n\n.ex11-tool {\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  padding: 8px 14px;\n  background: #fff;\n  border: 1.5px solid #111;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.75rem;\n  font-weight: 500;\n  cursor: pointer;\n  letter-spacing: 0.04em;\n  white-space: nowrap;\n}\n.ex11-tool:hover { background: #111; color: #fff; }\n\n.ex11-icon { font-style: normal; }\n\n@container ex11-wrap (max-width: 400px) {\n  .ex11-lbl { display: none; }\n  .ex11-tool { padding: 10px 12px; }\n}\n\n@supports not (container-type: inline-size) {\n  .ex11-lbl { display: inline; }\n}',
         js: "// No JavaScript needed",
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex12",
         num: "12",
@@ -198,14 +175,14 @@ const GROUPS = [
     ],
   },
 
-  /* ════════════════════════════════════════════════════════════════════════ */
+  
   {
     letter: "D",
     id: "viewtransitions",
     title: "View Transitions",
     desc: "document.startViewTransition()  ·  view-transition-name  ·  ::view-transition-*",
     examples: [
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex13",
         num: "13",
@@ -217,7 +194,7 @@ const GROUPS = [
         css: '.ex13-toolbar {\n  display: flex;\n  gap: 6px;\n  margin-bottom: 14px;\n}\n\n.ex13-filter-btn {\n  padding: 6px 16px;\n  border: 1.5px solid #111;\n  background: #F3F1EA;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.7rem;\n  text-transform: uppercase;\n  letter-spacing: 0.08em;\n  cursor: pointer;\n  transition: background 0.1s;\n}\n.ex13-filter-btn.is-active,\n.ex13-filter-btn:hover {\n  background: #111;\n  color: #fff;\n}\n\n.ex13-grid {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 8px;\n}\n\n.ex13-item {\n  aspect-ratio: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-family: "IBM Plex Mono", monospace;\n  font-weight: 700;\n  font-size: 1rem;\n  border: 1.5px solid #111;\n}\n\n.ex13-item[data-cat="blue"] { background: #1B37FF; color: #fff; }\n.ex13-item[data-cat="lime"] { background: #C8FF00; color: #111; }\n.ex13-item[data-cat="ink"]  { background: #111;    color: #fff; }\n\n@supports (view-transition-name: none) {\n  .ex13-item { view-transition-name: none; }\n}',
         js: 'var btns = document.querySelectorAll(".ex13-filter-btn");\nvar grid = document.getElementById("ex13-grid");\nvar currentFilter = "all";\n\nfunction applyFilter(f) {\n  currentFilter = f;\n  btns.forEach(function(b) {\n    b.classList.toggle("is-active", b.dataset.filter === f);\n  });\n  var items = Array.from(grid.querySelectorAll(".ex13-item"));\n  items.forEach(function(item, i) {\n    var id = "ex13-item-" + item.dataset.id;\n    item.style.viewTransitionName = id;\n  });\n  function doUpdate() {\n    items.forEach(function(item) {\n      item.style.display = (f === "all" || item.dataset.cat === f) ? "" : "none";\n    });\n  }\n  if (document.startViewTransition) {\n    document.startViewTransition(doUpdate);\n  } else {\n    doUpdate();\n  }\n}\n\nbtns.forEach(function(btn) {\n  btn.addEventListener("click", function() { applyFilter(btn.dataset.filter); });\n});',
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex14",
         num: "14",
@@ -229,7 +206,7 @@ const GROUPS = [
         css: '.ex14-tabs {\n  border: 1.5px solid #111;\n  background: #fff;\n}\n\n.ex14-tab-list {\n  display: flex;\n  border-bottom: 1.5px solid #111;\n  background: #F3F1EA;\n}\n\n.ex14-tab {\n  padding: 12px 20px;\n  background: none;\n  border: none;\n  border-right: 1.5px solid #111;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.78rem;\n  letter-spacing: 0.05em;\n  cursor: pointer;\n  color: #555;\n  position: relative;\n}\n.ex14-tab:last-child { border-right: none; }\n.ex14-tab:hover { background: rgba(0,0,0,0.04); color: #111; }\n\n.ex14-tab.is-active {\n  background: #fff;\n  color: #1B37FF;\n  font-weight: 700;\n  border-bottom: 2.5px solid #1B37FF;\n  margin-bottom: -1.5px;\n}\n\n@supports (view-transition-name: none) {\n  .ex14-tab.is-active {\n    view-transition-name: ex14-indicator;\n  }\n}\n\n.ex14-panels { padding: 20px; }\n\n.ex14-panel {\n  font-size: 0.85rem;\n  line-height: 1.6;\n  color: #333;\n}',
         js: 'var tabs = document.querySelectorAll(".ex14-tab");\n\ntabs.forEach(function(tab) {\n  tab.addEventListener("click", function() {\n    var targetId = "ex14-panel-" + tab.dataset.tab;\n    function doSwitch() {\n      document.querySelectorAll(".ex14-tab").forEach(function(t) {\n        var wasActive = t.classList.contains("is-active");\n        t.classList.remove("is-active");\n        t.setAttribute("aria-selected", "false");\n        if (wasActive) t.style.viewTransitionName = "";\n      });\n      document.querySelectorAll(".ex14-panel").forEach(function(p) {\n        p.hidden = (p.id !== targetId);\n      });\n      tab.classList.add("is-active");\n      tab.setAttribute("aria-selected", "true");\n      tab.style.viewTransitionName = "ex14-indicator";\n    }\n    if (document.startViewTransition) {\n      document.startViewTransition(doSwitch);\n    } else {\n      doSwitch();\n    }\n  });\n});',
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex15",
         num: "15",
@@ -241,7 +218,7 @@ const GROUPS = [
         css: '.ex15-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 10px;\n}\n\n.ex15-thumb {\n  aspect-ratio: 4/3;\n  background: repeating-linear-gradient(-45deg, #1B37FF 0, #1B37FF 2px, #F3F1EA 2px, #F3F1EA 12px);\n  border: 1.5px solid #111;\n  cursor: pointer;\n  display: flex;\n  align-items: flex-end;\n  padding: 8px;\n  transition: box-shadow 0.15s;\n}\n.ex15-thumb:hover { box-shadow: 4px 4px 0 #111; }\n\n.ex15-thumb-label {\n  background: #111;\n  color: #fff;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.65rem;\n  letter-spacing: 0.1em;\n  text-transform: uppercase;\n  padding: 3px 8px;\n  pointer-events: none;\n}\n\n@supports (view-transition-name: none) {\n  .ex15-thumb[data-active="true"] {\n    view-transition-name: ex15-card;\n  }\n  .ex15-detail {\n    view-transition-name: ex15-card;\n  }\n}\n\n.ex15-detail {\n  background: #fff;\n  border: 1.5px solid #111;\n  box-shadow: 6px 6px 0 #111;\n  padding: 24px;\n}\n\n.ex15-close {\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.72rem;\n  text-transform: uppercase;\n  letter-spacing: 0.08em;\n  background: none;\n  border: 1.5px solid #111;\n  padding: 6px 14px;\n  cursor: pointer;\n  margin-bottom: 14px;\n}\n.ex15-close:hover { background: #111; color: #fff; }\n\n.ex15-detail-id {\n  font-size: 2rem;\n  font-weight: 900;\n  color: #1B37FF;\n  margin-bottom: 10px;\n}\n\n.ex15-detail-body {\n  font-size: 0.85rem;\n  line-height: 1.6;\n  color: #555;\n}',
         js: 'var thumbs  = document.querySelectorAll(".ex15-thumb");\nvar detail  = document.getElementById("ex15-detail");\nvar detailId= document.getElementById("ex15-detail-id");\nvar closeBtn= document.getElementById("ex15-close");\nvar current = null;\n\nfunction expand(item) {\n  if (current) current.removeAttribute("data-active");\n  item.setAttribute("data-active", "true");\n  current = item;\n  detailId.textContent = "Item " + item.dataset.item.padStart(2,"0");\n  function doExpand() {\n    item.style.viewTransitionName = "ex15-card";\n    detail.hidden = false;\n  }\n  if (document.startViewTransition) {\n    document.startViewTransition(doExpand);\n  } else {\n    doExpand();\n  }\n}\n\nfunction collapse() {\n  function doCollapse() {\n    detail.hidden = true;\n    if (current) { current.removeAttribute("data-active"); current.style.viewTransitionName = ""; current = null; }\n  }\n  if (document.startViewTransition) {\n    document.startViewTransition(doCollapse);\n  } else {\n    doCollapse();\n  }\n}\n\nthumbs.forEach(function(t) { t.addEventListener("click", function() { expand(t); }); });\nif (closeBtn) closeBtn.addEventListener("click", collapse);',
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex16",
         num: "16",
@@ -256,14 +233,14 @@ const GROUPS = [
     ],
   },
 
-  /* ════════════════════════════════════════════════════════════════════════ */
+  
   {
     letter: "E",
     id: "anchor",
     title: "Anchor Positioning",
     desc: "anchor-name  ·  position-anchor  ·  position-try-fallbacks",
     examples: [
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex17",
         num: "17",
@@ -275,7 +252,7 @@ const GROUPS = [
         css: '.ex17-demo {\n  position: relative;\n  padding: 60px 20px 20px;\n}\n\n.ex17-hint {\n  font-size: 0.78rem;\n  color: #555;\n  margin-bottom: 20px;\n  font-family: "IBM Plex Mono", monospace;\n}\n\n.ex17-btns {\n  display: flex;\n  gap: 8px;\n  justify-content: space-between;\n}\n\n.ex17-trigger {\n  padding: 10px 16px;\n  border: 1.5px solid #111;\n  background: #F3F1EA;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.75rem;\n  letter-spacing: 0.06em;\n  cursor: pointer;\n}\n.ex17-trigger:hover { background: #111; color: #fff; }\n\n/* Anchor positioning */\n#ex17-btn1  { anchor-name: --ex17-a1; }\n#ex17-btn2  { anchor-name: --ex17-a2; }\n#ex17-btn3  { anchor-name: --ex17-a3; }\n\n.ex17-tooltip {\n  position: absolute;\n  background: #111;\n  color: #fff;\n  padding: 6px 12px;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.68rem;\n  letter-spacing: 0.05em;\n  white-space: nowrap;\n  pointer-events: none;\n  opacity: 0;\n  transition: opacity 0.15s;\n  z-index: 10;\n}\n\n#ex17-tip1 {\n  position-anchor: --ex17-a1;\n  bottom: anchor(top);\n  left: anchor(left);\n}\n#ex17-tip2 {\n  position-anchor: --ex17-a2;\n  bottom: anchor(top);\n  left: anchor(center);\n  translate: -50% 0;\n}\n#ex17-tip3 {\n  position-anchor: --ex17-a3;\n  bottom: anchor(top);\n  right: anchor(right);\n  translate: 0 0;\n}\n\n@supports not (anchor-name: --x) {\n  .ex17-tooltip {\n    position: absolute;\n    bottom: calc(100% + 8px);\n    left: 50%;\n    translate: -50% 0;\n  }\n}\n\n.ex17-trigger:hover + .ex17-tooltip,\n.ex17-trigger:focus + .ex17-tooltip {\n  opacity: 1;\n}',
         js: "// No JavaScript needed",
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex18",
         num: "18",
@@ -287,7 +264,7 @@ const GROUPS = [
         css: '.ex18-demo {\n  position: relative;\n  min-height: 180px;\n  padding: 20px;\n}\n\n.ex18-trigger {\n  anchor-name: --ex18-btn;\n  padding: 10px 20px;\n  background: #111;\n  color: #fff;\n  border: 1.5px solid #111;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.78rem;\n  letter-spacing: 0.06em;\n  cursor: pointer;\n}\n.ex18-trigger:hover { background: #1B37FF; border-color: #1B37FF; }\n\n.ex18-menu {\n  position-anchor: --ex18-btn;\n  position: absolute;\n  top: anchor(bottom);\n  left: anchor(left);\n  margin-top: 4px;\n  background: #fff;\n  border: 1.5px solid #111;\n  box-shadow: 4px 4px 0 #111;\n  min-width: 160px;\n  padding: 4px 0;\n}\n\n@supports not (anchor-name: --x) {\n  .ex18-menu {\n    position: absolute;\n    top: 52px;\n    left: 20px;\n  }\n}\n\n.ex18-menu:not(:popover-open) { display: none; }\n\n.ex18-item {\n  display: block;\n  width: 100%;\n  text-align: left;\n  padding: 10px 16px;\n  background: none;\n  border: none;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.78rem;\n  cursor: pointer;\n  color: #111;\n  letter-spacing: 0.04em;\n}\n.ex18-item:hover { background: #F3F1EA; }\n\n.ex18-item--danger { color: #cc0000; }\n.ex18-item--danger:hover { background: #fff0f0; }\n\n.ex18-divider {\n  border: none;\n  border-top: 1px solid #ddd;\n  margin: 4px 0;\n}',
         js: '// Native popover attribute handles open/close.\n// JS fallback for browsers without popover support.\n(function() {\n  var trigger = document.getElementById("ex18-trigger");\n  var menu    = document.getElementById("ex18-menu");\n  if (!trigger || !menu) return;\n  if (typeof menu.showPopover === "function") return; // native\n  // Fallback\n  menu.style.display = "none";\n  trigger.addEventListener("click", function() {\n    var isOpen = menu.style.display !== "none";\n    menu.style.display = isOpen ? "none" : "block";\n  });\n  document.addEventListener("click", function(e) {\n    if (!menu.contains(e.target) && e.target !== trigger) {\n      menu.style.display = "none";\n    }\n  });\n}());',
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex19",
         num: "19",
@@ -299,7 +276,7 @@ const GROUPS = [
         css: '.ex19-diagram {\n  position: relative;\n  height: 220px;\n  background: #fff;\n  border: 1.5px solid #111;\n  display: flex;\n  align-items: center;\n  justify-content: space-around;\n  padding: 0 30px;\n}\n\n.ex19-node {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 80px;\n  height: 80px;\n  background: #F3F1EA;\n  border: 1.5px solid #111;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.75rem;\n  font-weight: 700;\n  letter-spacing: 0.08em;\n  text-transform: uppercase;\n  box-shadow: 3px 3px 0 #111;\n}\n\n#ex19-node1 { anchor-name: --ex19-n1; }\n#ex19-node2 { anchor-name: --ex19-n2; }\n#ex19-node3 { anchor-name: --ex19-n3; }\n\n.ex19-annotation {\n  position: absolute;\n  background: #111;\n  color: #C8FF00;\n  padding: 6px 10px;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.6rem;\n  letter-spacing: 0.06em;\n  line-height: 1.5;\n  white-space: nowrap;\n  pointer-events: none;\n}\n\n#ex19-ann1 {\n  position-anchor: --ex19-n1;\n  top: anchor(bottom);\n  left: anchor(center);\n  translate: -50% 8px;\n}\n#ex19-ann2 {\n  position-anchor: --ex19-n2;\n  bottom: anchor(top);\n  left: anchor(center);\n  translate: -50% -8px;\n}\n#ex19-ann3 {\n  position-anchor: --ex19-n3;\n  top: anchor(bottom);\n  left: anchor(center);\n  translate: -50% 8px;\n}\n\n@supports not (anchor-name: --x) {\n  #ex19-ann1 { top: 66%;  left: 8%;  translate: none; }\n  #ex19-ann2 { top: 5%;   left: 40%; translate: -50% 0; }\n  #ex19-ann3 { top: 66%;  left: 68%; translate: none; }\n}',
         js: "// No JavaScript needed",
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex20",
         num: "20",
@@ -314,14 +291,14 @@ const GROUPS = [
     ],
   },
 
-  /* ════════════════════════════════════════════════════════════════════════ */
+  
   {
     letter: "F",
     id: "has",
     title: ":has()",
     desc: ":has()  ·  quantity queries  ·  relational selectors",
     examples: [
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex21",
         num: "21",
@@ -332,7 +309,7 @@ const GROUPS = [
         css: '.ex21-demo {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n\n.ex21-card {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  padding: 16px 20px;\n  border: 1.5px solid #ccc;\n  background: #fff;\n  cursor: pointer;\n  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;\n}\n\n.ex21-check {\n  width: 18px;\n  height: 18px;\n  accent-color: #1B37FF;\n  flex-shrink: 0;\n}\n\n.ex21-card-body { flex: 1; }\n\n.ex21-card-title {\n  display: block;\n  font-weight: 700;\n  font-size: 0.9rem;\n  margin-bottom: 2px;\n}\n\n.ex21-card-desc {\n  display: block;\n  font-size: 0.78rem;\n  color: #555;\n  font-family: "IBM Plex Mono", monospace;\n}\n\n.ex21-checkmark {\n  width: 22px;\n  height: 22px;\n  border: 1.5px solid #ccc;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-shrink: 0;\n  font-size: 0.9rem;\n}\n\n/* :has() magic */\n@supports selector(:has(a)) {\n  .ex21-card:has(.ex21-check:checked) {\n    border-color: #1B37FF;\n    background: #f0f3ff;\n    box-shadow: 4px 4px 0 #1B37FF;\n  }\n  .ex21-card:has(.ex21-check:checked) .ex21-checkmark::after {\n    content: "&#10003;";\n  }\n  .ex21-card:has(.ex21-check:checked) .ex21-checkmark {\n    border-color: #1B37FF;\n    color: #1B37FF;\n    font-weight: 700;\n  }\n}',
         js: "// No JavaScript needed",
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex22",
         num: "22",
@@ -344,7 +321,7 @@ const GROUPS = [
         css: '.ex22-form {\n  display: flex;\n  flex-direction: column;\n  gap: 18px;\n  max-width: 360px;\n}\n\n.ex22-field {\n  display: flex;\n  flex-direction: column;\n  gap: 4px;\n}\n\n.ex22-label {\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.72rem;\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n  color: #555;\n}\n\n.ex22-input {\n  padding: 10px 14px;\n  border: 1.5px solid #ccc;\n  background: #fff;\n  font-family: inherit;\n  font-size: 0.9rem;\n  color: #111;\n  transition: border-color 0.15s;\n}\n.ex22-input:focus { border-color: #1B37FF; outline: none; }\n\n.ex22-msg { font-family: "IBM Plex Mono", monospace; font-size: 0.65rem; }\n.ex22-msg--error { color: #cc0000; display: none; }\n.ex22-msg--ok    { color: #1B7B1B; display: none; }\n\n/* :has() driven states — no JS */\n@supports selector(:has(a)) {\n  .ex22-field:has(.ex22-input:not(:placeholder-shown):invalid) .ex22-msg--error { display: block; }\n  .ex22-field:has(.ex22-input:not(:placeholder-shown):valid)   .ex22-msg--ok    { display: block; }\n  .ex22-field:has(.ex22-input:not(:placeholder-shown):invalid) .ex22-input {\n    border-color: #cc0000;\n  }\n  .ex22-field:has(.ex22-input:not(:placeholder-shown):valid) .ex22-input {\n    border-color: #1B7B1B;\n  }\n}\n\n.ex22-submit {\n  padding: 12px 28px;\n  background: #111;\n  color: #fff;\n  border: 1.5px solid #111;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.78rem;\n  letter-spacing: 0.08em;\n  text-transform: uppercase;\n  cursor: pointer;\n  align-self: flex-start;\n}\n.ex22-submit:hover { background: #1B37FF; border-color: #1B37FF; }',
         js: "// No JavaScript needed",
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex23",
         num: "23",
@@ -355,7 +332,7 @@ const GROUPS = [
         css: '.ex23-hint {\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.72rem;\n  color: #555;\n  margin-bottom: 12px;\n}\n\n.ex23-controls {\n  display: flex;\n  gap: 8px;\n  margin-bottom: 14px;\n}\n\n.ex23-btn {\n  padding: 8px 18px;\n  border: 1.5px solid #111;\n  background: #F3F1EA;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 0.72rem;\n  letter-spacing: 0.06em;\n  cursor: pointer;\n}\n.ex23-btn:hover { background: #111; color: #fff; }\n\n.ex23-grid {\n  display: grid;\n  gap: 8px;\n  grid-template-columns: 1fr;\n}\n\n.ex23-item {\n  padding: 20px;\n  background: #fff;\n  border: 1.5px solid #111;\n  font-family: "IBM Plex Mono", monospace;\n  font-size: 1.2rem;\n  font-weight: 700;\n  text-align: center;\n  color: #1B37FF;\n}\n\n/* Quantity queries via :has() */\n@supports selector(:has(a)) {\n  /* 2 items */\n  .ex23-grid:has(.ex23-item:nth-child(2)):not(:has(.ex23-item:nth-child(3))) {\n    grid-template-columns: 1fr 1fr;\n  }\n  /* 3–4 items */\n  .ex23-grid:has(.ex23-item:nth-child(3)):not(:has(.ex23-item:nth-child(5))) {\n    grid-template-columns: 1fr 1fr 1fr;\n  }\n  /* 5+ items */\n  .ex23-grid:has(.ex23-item:nth-child(5)) {\n    grid-template-columns: repeat(4, 1fr);\n  }\n}',
         js: 'var grid   = document.getElementById("ex23-grid");\nvar addBtn = document.getElementById("ex23-add");\nvar remBtn = document.getElementById("ex23-remove");\nvar count  = 3;\n\nif (addBtn) addBtn.addEventListener("click", function() {\n  count++;\n  var item = document.createElement("div");\n  item.className = "ex23-item";\n  item.textContent = String(count).padStart(2, "0");\n  grid.appendChild(item);\n});\n\nif (remBtn) remBtn.addEventListener("click", function() {\n  var items = grid.querySelectorAll(".ex23-item");\n  if (items.length > 1) {\n    grid.removeChild(items[items.length - 1]);\n    count = items.length - 1;\n  }\n});',
       },
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex24",
         num: "24",
@@ -369,14 +346,14 @@ const GROUPS = [
     ],
   },
 
-  /* ════════════════════════════════════════════════════════════════════════ */
+  
   {
     letter: "G",
     id: "bonus",
     title: "Bonus",
     desc: "@starting-style  ·  interpolate-size  ·  @scope  ·  linear() easing",
     examples: [
-      /* ─────────────────────────────────────────────────────────────────── */
+      
       {
         id: "ex25",
         num: "25",
@@ -392,9 +369,7 @@ const GROUPS = [
   },
 ];
 
-/* ══════════════════════════════════════════════════════════════════════════
-   § 2 · SYNTAX HIGHLIGHTER
-   ══════════════════════════════════════════════════════════════════════════ */
+
 
 function escapeHtml(str) {
   return str
@@ -406,22 +381,16 @@ function escapeHtml(str) {
 
 function highlightCSS(raw) {
   var s = escapeHtml(raw);
-  // Comments
   s = s.replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="hl-comment">$1</span>');
-  // At-rules
   s = s.replace(/(@[\w-]+)/g, '<span class="hl-selector">$1</span>');
-  // Selectors (lines ending with {)
   s = s.replace(/^([^{}<\n]+)\s*\{/gm, function (m, sel) {
     return '<span class="hl-selector">' + sel.trimEnd() + "</span> {";
   });
-  // Properties
   s = s.replace(/([\w-]+)\s*:/g, '<span class="hl-prop">$1</span>:');
-  // Quoted strings
   s = s.replace(
     /(&quot;[^&]*?&quot;|'[^']*?')/g,
     '<span class="hl-value">$1</span>',
   );
-  // Numbers with units
   s = s.replace(
     /(\b\d+\.?\d*(%|px|rem|em|fr|vh|vw|deg|ms|s|cqi|cqw)?\b)/g,
     '<span class="hl-number">$1</span>',
@@ -430,20 +399,13 @@ function highlightCSS(raw) {
 }
 
 function highlightHTML(raw) {
-  // Tokenise tag-by-tag so attribute regexes can never bleed across tag boundaries.
-  // Strategy: split on `<...>` boundaries, highlight each tag fragment independently,
-  // then reassemble with the text nodes untouched (except HTML-escaping).
   var out = "";
-  // Walk through raw source character by character via regex split on tags.
-  // We use a capturing split so the delimiters (tags) are kept in the array.
   var parts = raw.split(/(<[^>]*>)/);
   for (var i = 0; i < parts.length; i++) {
     var part = parts[i];
     if (part.charAt(0) === "<") {
-      // It's a tag — highlight it internally
       out += highlightHTMLTag(part);
     } else {
-      // Text node — just escape
       out += escapeHtml(part);
     }
   }
@@ -451,80 +413,59 @@ function highlightHTML(raw) {
 }
 
 function highlightHTMLTag(tag) {
-  // Handle comments
   if (/^<!--/.test(tag)) {
     return '<span class="hl-comment">' + escapeHtml(tag) + '</span>';
   }
 
-  // Work on the RAW tag string (before any HTML-escaping) so we don't have
-  // to fight with &quot; entities mid-regex. We build the highlighted string
-  // piece by piece, HTML-escaping every literal piece as we emit it.
 
-  // Parse the tag manually into: opening-punct, tagname, attrs-string, closing-punct
-  // e.g.  <button class="foo" disabled>
-  //        ^------  ------^  ^-------^ ^
   var closingSlashOpen = tag.startsWith('</');
-  var selfClose        = tag.endsWith('/>');
+  var selfClose = tag.endsWith('/>');
 
-  // Strip the outer < > (and optional / before tagname or before >)
   var inner = tag.slice(closingSlashOpen ? 2 : 1, selfClose ? tag.length - 2 : tag.length - 1);
-  // inner is now e.g. 'button class="foo" disabled' or 'button'
 
-  // Pull the tag name off the front
   var nameMatch = inner.match(/^([\w-]+)([\s\S]*)$/);
   if (!nameMatch) {
-    // Fallback: just escape and return
     return escapeHtml(tag);
   }
-  var tagName  = nameMatch[1];
-  var attrStr  = nameMatch[2]; // everything after the tag name
+  var tagName = nameMatch[1];
+  var attrStr = nameMatch[2];
 
-  // Build output string
   var out = '';
 
-  // Opening punctuation  < or </
   out += '<span class="hl-punct">' + (closingSlashOpen ? '&lt;/' : '&lt;') + '</span>';
-  // Tag name
   out += '<span class="hl-tag">' + escapeHtml(tagName) + '</span>';
 
-  // Parse the attribute string token by token
-  // Each iteration consumes one attribute (name, name=value) or whitespace
   var rest = attrStr;
   while (rest.length > 0) {
-    // Leading whitespace — emit as-is
     var wsMatch = rest.match(/^(\s+)/);
     if (wsMatch) {
-      out  += wsMatch[1];
-      rest  = rest.slice(wsMatch[1].length);
+      out += wsMatch[1];
+      rest = rest.slice(wsMatch[1].length);
       continue;
     }
 
-    // attr="value" or attr='value'
     var avDQ = rest.match(/^([\w-]+)(=)("(?:[^"\\]|\\.)*")/);
     var avSQ = rest.match(/^([\w-]+)(=)('(?:[^'\\]|\\.)*')/);
     var avMatch = avDQ || avSQ;
     if (avMatch) {
-      out  += '<span class="hl-attr">' + escapeHtml(avMatch[1]) + '</span>';
-      out  += '=';
-      out  += '<span class="hl-string">' + escapeHtml(avMatch[3]) + '</span>';
-      rest  = rest.slice(avMatch[0].length);
+      out += '<span class="hl-attr">' + escapeHtml(avMatch[1]) + '</span>';
+      out += '=';
+      out += '<span class="hl-string">' + escapeHtml(avMatch[3]) + '</span>';
+      rest = rest.slice(avMatch[0].length);
       continue;
     }
 
-    // Boolean attribute (no value)
     var boolMatch = rest.match(/^([\w-]+)/);
     if (boolMatch) {
-      out  += '<span class="hl-attr">' + escapeHtml(boolMatch[1]) + '</span>';
-      rest  = rest.slice(boolMatch[1].length);
+      out += '<span class="hl-attr">' + escapeHtml(boolMatch[1]) + '</span>';
+      rest = rest.slice(boolMatch[1].length);
       continue;
     }
 
-    // Anything else (stray = sign, etc.) — escape and skip one char
-    out  += escapeHtml(rest.charAt(0));
-    rest  = rest.slice(1);
+    out += escapeHtml(rest.charAt(0));
+    rest = rest.slice(1);
   }
 
-  // Closing punctuation  > or />
   out += '<span class="hl-punct">' + (selfClose ? '/&gt;' : '&gt;') + '</span>';
 
   return out;
@@ -532,21 +473,18 @@ function highlightHTMLTag(tag) {
 
 function highlightJS(raw) {
   var s = escapeHtml(raw);
-  // Line comments
   s = s.replace(/(\/\/[^\n]*)/g, '<span class="hl-comment">$1</span>');
-  // Block comments
   s = s.replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="hl-comment">$1</span>');
-  // Strings
   s = s.replace(
     /(&quot;[^&]*?&quot;|'[^']*?')/g,
     '<span class="hl-string">$1</span>',
   );
-  // Keywords
+  
   s = s.replace(
     /\b(var|let|const|function|return|if|else|for|while|new|this|true|false|null|undefined|typeof|instanceof|document|window)\b/g,
     '<span class="hl-keyword">$1</span>',
   );
-  // Numbers
+  
   s = s.replace(/\b(\d+\.?\d*)\b/g, '<span class="hl-number">$1</span>');
   return s;
 }
@@ -558,9 +496,7 @@ function highlight(code, lang) {
   return escapeHtml(code);
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   § 3 · RENDER ENGINE
-   ══════════════════════════════════════════════════════════════════════════ */
+
 
 function injectExampleStyles() {
   GROUPS.forEach(function (group) {
@@ -578,17 +514,17 @@ function buildSpecimen(ex, groupLetter) {
     return acc + g.examples.length;
   }, 0);
 
-  // Build feature tags HTML
+  
   var tagsHtml = ex.tags
     .map(function (t) {
       return '<span class="feature-tag">' + escapeHtml(t) + "</span>";
     })
     .join("");
 
-  // Build the demo HTML by injecting it raw (it runs from the same strings)
+  
   var demoHtml = ex.html;
 
-  // Build tab panels
+  
   var htmlHighlit =
     '<pre class="code-block" aria-label="HTML source">' +
     highlight(ex.html, "html") +
@@ -611,21 +547,21 @@ function buildSpecimen(ex, groupLetter) {
     '<header class="specimen__header">',
     "  <div>",
     '    <div class="specimen__index">' +
-      ex.num +
-      " / " +
-      String(total).padStart(2, "0") +
-      "</div>",
+    ex.num +
+    " / " +
+    String(total).padStart(2, "0") +
+    "</div>",
     '    <h3 class="specimen__title" id="' +
-      ex.id +
-      '-title">' +
-      escapeHtml(ex.title) +
-      "</h3>",
+    ex.id +
+    '-title">' +
+    escapeHtml(ex.title) +
+    "</h3>",
     "  </div>",
     '  <div class="specimen__meta">',
     "    " + tagsHtml,
     '    <span class="support-note" title="Browser support note">' +
-      escapeHtml(ex.support) +
-      "</span>",
+    escapeHtml(ex.support) +
+    "</span>",
     "  </div>",
     "</header>",
     '<div class="specimen__stage" id="' + ex.id + '-stage">',
@@ -633,52 +569,52 @@ function buildSpecimen(ex, groupLetter) {
     "</div>",
     '<div class="specimen__tabs" id="' + ex.id + '-tabs">',
     '  <div class="tabs__nav" role="tablist" aria-label="Code tabs for ' +
-      escapeHtml(ex.title) +
-      '">',
+    escapeHtml(ex.title) +
+    '">',
     '    <button class="tabs__btn" role="tab" aria-selected="true"  aria-controls="' +
-      ex.id +
-      '-panel-html" id="' +
-      ex.id +
-      '-tab-html">HTML</button>',
+    ex.id +
+    '-panel-html" id="' +
+    ex.id +
+    '-tab-html">HTML</button>',
     '    <button class="tabs__btn" role="tab" aria-selected="false" aria-controls="' +
-      ex.id +
-      '-panel-css"  id="' +
-      ex.id +
-      '-tab-css">CSS</button>',
+    ex.id +
+    '-panel-css"  id="' +
+    ex.id +
+    '-tab-css">CSS</button>',
     '    <button class="tabs__btn" role="tab" aria-selected="false" aria-controls="' +
-      ex.id +
-      '-panel-js"   id="' +
-      ex.id +
-      '-tab-js">JS</button>',
+    ex.id +
+    '-panel-js"   id="' +
+    ex.id +
+    '-tab-js">JS</button>',
     '    <div class="tabs__actions">',
     '      <button class="tabs__action-btn" data-copy="' +
-      ex.id +
-      '" type="button" aria-label="Copy code">Copy</button>',
+    ex.id +
+    '" type="button" aria-label="Copy code">Copy</button>',
     '      <button class="tabs__action-btn" data-playground="' +
-      ex.id +
-      '" type="button" aria-label="Open in playground">Open in Playground ↗</button>',
+    ex.id +
+    '" type="button" aria-label="Open in playground">Open in Playground ↗</button>',
     "    </div>",
     "  </div>",
     '  <div class="tabs__panels">',
     '    <div class="tabs__panel" id="' +
-      ex.id +
-      '-panel-html" role="tabpanel" aria-labelledby="' +
-      ex.id +
-      '-tab-html" aria-hidden="false">',
+    ex.id +
+    '-panel-html" role="tabpanel" aria-labelledby="' +
+    ex.id +
+    '-tab-html" aria-hidden="false">',
     "      " + htmlHighlit,
     "    </div>",
     '    <div class="tabs__panel" id="' +
-      ex.id +
-      '-panel-css"  role="tabpanel" aria-labelledby="' +
-      ex.id +
-      '-tab-css"  aria-hidden="true">',
+    ex.id +
+    '-panel-css"  role="tabpanel" aria-labelledby="' +
+    ex.id +
+    '-tab-css"  aria-hidden="true">',
     "      " + cssHighlit,
     "    </div>",
     '    <div class="tabs__panel" id="' +
-      ex.id +
-      '-panel-js"   role="tabpanel" aria-labelledby="' +
-      ex.id +
-      '-tab-js"   aria-hidden="true">',
+    ex.id +
+    '-panel-js"   role="tabpanel" aria-labelledby="' +
+    ex.id +
+    '-tab-js"   aria-hidden="true">',
     "      " + jsHighlit,
     "    </div>",
     "  </div>",
@@ -697,15 +633,15 @@ function buildFeatureGroup(group) {
   var headerHtml = [
     '<div class="feature-group__header">',
     '  <span class="feature-group__letter" aria-hidden="true">' +
-      group.letter +
-      "</span>",
+    group.letter +
+    "</span>",
     '  <div class="feature-group__info">',
     '    <div class="feature-group__label">Group ' + group.letter + "</div>",
     '    <h2 class="feature-group__title" id="group-title-' +
-      group.id +
-      '">' +
-      escapeHtml(group.title) +
-      "</h2>",
+    group.id +
+    '">' +
+    escapeHtml(group.title) +
+    "</h2>",
     '    <p class="feature-group__desc">' + escapeHtml(group.desc) + "</p>",
     "  </div>",
     "</div>",
@@ -737,7 +673,7 @@ function runExampleScripts() {
     group.examples.forEach(function (ex) {
       if (ex.js && ex.js.trim() !== "// No JavaScript needed") {
         try {
-          // eslint-disable-next-line no-new-func
+          
           new Function(ex.js)();
         } catch (e) {
           console.warn("[HAIRLINE] Script error in " + ex.id + ":", e);
@@ -747,9 +683,7 @@ function runExampleScripts() {
   });
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   § 4 · TABS & COPY
-   ══════════════════════════════════════════════════════════════════════════ */
+
 
 function initTabs() {
   document.addEventListener("click", function (e) {
@@ -782,7 +716,7 @@ function initCopyButtons() {
       var exId = copyBtn.getAttribute("data-copy");
       var ex = findExample(exId);
       if (!ex) return;
-      // Find the active tab
+      
       var tabsEl = document.getElementById(exId + "-tabs");
       var activeTab = tabsEl
         ? tabsEl.querySelector('[aria-selected="true"]')
@@ -841,31 +775,24 @@ function findExample(id) {
   return null;
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   § 5 · PLAYGROUND SYNTAX HIGHLIGHT OVERLAY
-   ══════════════════════════════════════════════════════════════════════════
-   Technique: a <pre class="pg-highlight"> sits absolutely behind each
-   transparent textarea. On every keystroke the textarea value is run through
-   the same highlight() function used by the specimen tabs, and the result is
-   set as the pre's innerHTML. Scroll is mirrored so the two stay in sync.
-*/
+
 
 var PG_PANES = [
   { textareaId: 'pg-html', preId: 'pg-highlight-html', lang: 'html' },
-  { textareaId: 'pg-css',  preId: 'pg-highlight-css',  lang: 'css'  },
-  { textareaId: 'pg-js',   preId: 'pg-highlight-js',   lang: 'js'   },
+  { textareaId: 'pg-css', preId: 'pg-highlight-css', lang: 'css' },
+  { textareaId: 'pg-js', preId: 'pg-highlight-js', lang: 'js' },
 ];
 
 function refreshHighlight(pane) {
-  var ta  = document.getElementById(pane.textareaId);
+  var ta = document.getElementById(pane.textareaId);
   var pre = document.getElementById(pane.preId);
   if (!ta || !pre) return;
-  // highlight() already HTML-escapes and wraps in spans
+  
   var highlighted = highlight(ta.value, pane.lang);
-  // Append a trailing newline so the last line always has full line-height
+  
   pre.innerHTML = highlighted + '\n';
-  // Mirror scroll position
-  pre.scrollTop  = ta.scrollTop;
+  
+  pre.scrollTop = ta.scrollTop;
   pre.scrollLeft = ta.scrollLeft;
 }
 
@@ -874,29 +801,29 @@ function refreshAllHighlights() {
 }
 
 function initPlaygroundHighlight() {
-  PG_PANES.forEach(function(pane) {
-    var ta  = document.getElementById(pane.textareaId);
+  PG_PANES.forEach(function (pane) {
+    var ta = document.getElementById(pane.textareaId);
     var pre = document.getElementById(pane.preId);
     if (!ta || !pre) return;
 
-    // Update highlight on every keystroke
-    ta.addEventListener('input', function() {
+    
+    ta.addEventListener('input', function () {
       refreshHighlight(pane);
     });
 
-    // Sync scroll: when the user scrolls the textarea, move the pre too
-    ta.addEventListener('scroll', function() {
-      pre.scrollTop  = ta.scrollTop;
+    
+    ta.addEventListener('scroll', function () {
+      pre.scrollTop = ta.scrollTop;
       pre.scrollLeft = ta.scrollLeft;
     });
 
-    // Tab key: insert two spaces instead of losing focus
-    ta.addEventListener('keydown', function(e) {
+    
+    ta.addEventListener('keydown', function (e) {
       if (e.key === 'Tab') {
         e.preventDefault();
         var start = ta.selectionStart;
-        var end   = ta.selectionEnd;
-        var val   = ta.value;
+        var end = ta.selectionEnd;
+        var val = ta.value;
         ta.value = val.slice(0, start) + '  ' + val.slice(end);
         ta.selectionStart = ta.selectionEnd = start + 2;
         refreshHighlight(pane);
@@ -906,9 +833,7 @@ function initPlaygroundHighlight() {
   });
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   § 5 · PLAYGROUND
-   ══════════════════════════════════════════════════════════════════════════ */
+
 
 var PG_DEFAULT = {
   html: '<div class="demo">\n  <h1>Hello, CSS Platform!</h1>\n  <p>Edit the panes to experiment.</p>\n</div>',
@@ -928,9 +853,9 @@ function getPlaygroundCode() {
 
 function setPlaygroundCode(code) {
   document.getElementById("pg-html").value = code.html;
-  document.getElementById("pg-css").value  = code.css;
-  document.getElementById("pg-js").value   = code.js;
-  // Refresh the syntax highlight overlays after programmatic value change
+  document.getElementById("pg-css").value = code.css;
+  document.getElementById("pg-js").value = code.js;
+  
   refreshAllHighlights();
 }
 
@@ -967,7 +892,7 @@ function updateShareLink(code) {
     var shareBtn = document.getElementById("pg-share");
     shareBtn.href = "#pg=" + b64;
   } catch (e) {
-    /* ignore */
+    
   }
 }
 
@@ -984,7 +909,7 @@ function loadFromHash() {
         return;
       }
     } catch (e) {
-      /* fallback */
+      
     }
   }
   setPlaygroundCode(PG_DEFAULT);
@@ -1017,13 +942,13 @@ function initPlayground() {
   populateLoadDropdown();
   loadFromHash();
 
-  // Editor input → debounced render
+  
   ["pg-html", "pg-css", "pg-js"].forEach(function (id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener("input", debouncedRender);
   });
 
-  // Reset
+  
   var resetBtn = document.getElementById("pg-reset");
   if (resetBtn)
     resetBtn.addEventListener("click", function () {
@@ -1031,7 +956,7 @@ function initPlayground() {
       renderPlayground();
     });
 
-  // Copy all
+  
   var copyAllBtn = document.getElementById("pg-copy-all");
   if (copyAllBtn)
     copyAllBtn.addEventListener("click", function () {
@@ -1046,7 +971,7 @@ function initPlayground() {
       copyText(all, copyAllBtn);
     });
 
-  // Load dropdown
+  
   var sel = document.getElementById("pg-load");
   if (sel)
     sel.addEventListener("change", function () {
@@ -1056,7 +981,7 @@ function initPlayground() {
       }
     });
 
-  // Iframe error capture
+  
   var frame = document.getElementById("pg-frame");
   if (frame) {
     frame.addEventListener("load", function () {
@@ -1068,12 +993,12 @@ function initPlayground() {
           errStrip.hidden = false;
         });
       } catch (e) {
-        /* cross-origin; shouldn't happen with srcdoc */
+        
       }
     });
   }
 
-  // Share btn: copy URL
+  
   var shareBtn = document.getElementById("pg-share");
   if (shareBtn) {
     shareBtn.addEventListener("click", function (e) {
@@ -1085,9 +1010,7 @@ function initPlayground() {
   window.addEventListener("hashchange", loadFromHash);
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   § 6 · SUPPORT DETECTION & FEATURE CHIPS
-   ══════════════════════════════════════════════════════════════════════════ */
+
 
 var FEATURES = [
   {
@@ -1174,9 +1097,7 @@ function injectReadingProgressBar() {
   }
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   § 7 · NAV RAIL
-   ══════════════════════════════════════════════════════════════════════════ */
+
 
 function buildNavRail() {
   var container = document.getElementById("nav-groups");
@@ -1214,9 +1135,9 @@ function buildNavRail() {
 }
 
 function initNavHighlight() {
-  // Use IntersectionObserver for scroll-linked active state
-  // (scroll-driven CSS highlight on siblings requires :has + container which
-  //  may not be available in all targets; observer gives solid fallback)
+  
+  
+  
   var items = document.querySelectorAll(".nav-item");
   if (!items.length) return;
 
@@ -1245,20 +1166,18 @@ function initNavHighlight() {
   });
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   § 8 · THEME TOGGLE
-   ══════════════════════════════════════════════════════════════════════════ */
+
 
 function initThemeToggle() {
-  var html   = document.documentElement;
-  var btn    = document.getElementById("theme-toggle");
-  var label  = btn && btn.querySelector(".theme-toggle__label");
-  var STORE  = "hairline-theme";
+  var html = document.documentElement;
+  var btn = document.getElementById("theme-toggle");
+  var label = btn && btn.querySelector(".theme-toggle__label");
+  var STORE = "hairline-theme";
 
-  // Determine starting theme:
-  // 1. localStorage wins (user has toggled before)
-  // 2. fall back to OS preference
-  // 3. default to "light"
+  
+  
+  
+  
   function getSystemPref() {
     return window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -1267,7 +1186,7 @@ function initThemeToggle() {
   }
 
   var saved = null;
-  try { saved = localStorage.getItem(STORE); } catch(e) {}
+  try { saved = localStorage.getItem(STORE); } catch (e) { }
   var initial = saved || getSystemPref();
   applyTheme(initial, false);
 
@@ -1278,11 +1197,11 @@ function initThemeToggle() {
     applyTheme(current === "dark" ? "light" : "dark", true);
   });
 
-  // Also follow OS changes in real time when no manual override is stored
+  
   if (window.matchMedia) {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
       var manual = null;
-      try { manual = localStorage.getItem(STORE); } catch(e) {}
+      try { manual = localStorage.getItem(STORE); } catch (e) { }
       if (!manual) {
         applyTheme(e.matches ? "dark" : "light", false);
       }
@@ -1292,51 +1211,49 @@ function initThemeToggle() {
   function applyTheme(theme, persist) {
     html.setAttribute("data-theme", theme);
     if (persist) {
-      try { localStorage.setItem(STORE, theme); } catch(e) {}
+      try { localStorage.setItem(STORE, theme); } catch (e) { }
     }
     if (btn && label) {
       var isDark = theme === "dark";
-      label.textContent    = isDark ? "Light" : "Dark";
+      label.textContent = isDark ? "Light" : "Dark";
       btn.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
     }
   }
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   § 9 · INIT
-   ══════════════════════════════════════════════════════════════════════════ */
+
 
 document.addEventListener("DOMContentLoaded", function () {
-  // 1. Inject all example CSS into <head> as separate <style> tags
+  
   injectExampleStyles();
 
-  // 2. Render feature groups & specimens
+  
   renderExamples();
 
-  // 3. Run per-example JS (from the same example strings)
+  
   runExampleScripts();
 
-  // 4. Wire tabs + copy buttons
+  
   initTabs();
   initCopyButtons();
 
-  // 5. Nav rail
+  
   buildNavRail();
   initNavHighlight();
 
-  // 6. Playground highlight overlay (must come before initPlayground so
-  //    listeners exist when setPlaygroundCode calls refreshAllHighlights)
+  
+  
   initPlaygroundHighlight();
 
-  // 7. Playground logic (loads initial code + fires first highlight)
+  
   initPlayground();
 
-  // 8. Support chips
+  
   renderSupportChips();
 
-  // 9. Reading progress bar (scroll-driven)
+  
   injectReadingProgressBar();
 
-  // 10. Theme toggle
+  
   initThemeToggle();
 });

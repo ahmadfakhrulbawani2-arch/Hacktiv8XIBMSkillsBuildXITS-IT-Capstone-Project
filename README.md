@@ -1,4 +1,4 @@
-# Hacktiv8 × IBM SkillsBuild × ITS — Data Science Capstone Project: HAIRLINE CSS Platform Playground
+# Hacktiv8 × IBM SkillsBuild × ITS — IT Capstone Project: HAIRLINE CSS Platform Playground
 
 <div align="center">
 
@@ -11,6 +11,8 @@
 </div>
 
 ---
+
+![MAIN_PAGE](./docs/MAIN_PAGE.png)
 
 ## 📋 Description
 
@@ -28,10 +30,10 @@ The project is intended as both a **portfolio piece** and a **learning reference
 
 No installation, no build step, no npm. The only external resource is a Google Fonts import (Archivo + IBM Plex Mono) declared in `styles.css`.
 
-| Resource | Version | Purpose |
-|---|---|---|
-| [Archivo](https://fonts.google.com/specimen/Archivo) | Google Fonts | Display & body typeface |
-| [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) | Google Fonts | Code & label typeface |
+| Resource                                                         | Version      | Purpose                 |
+| ---------------------------------------------------------------- | ------------ | ----------------------- |
+| [Archivo](https://fonts.google.com/specimen/Archivo)             | Google Fonts | Display & body typeface |
+| [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) | Google Fonts | Code & label typeface   |
 
 ### Running the Project
 
@@ -80,15 +82,15 @@ Every specimen panel contains:
 
 ### 📚 Example Groups
 
-| Group | Feature | Examples |
-|---|---|---|
-| **A** | Scroll-Driven Animations | Reading progress bar, reveal on scroll, parallax layers, shrinking sticky header |
-| **B** | `@property` | Conic-gradient border, animated integer counter, conic progress ring, gradient sweep |
-| **C** | Container Queries | Layout-switching card, fluid `cqi` typography, collapsing toolbar, `style()` stat tile |
-| **D** | View Transitions | Filter/sort grid, morphing tab indicator, thumbnail expand, list shuffle |
-| **E** | Anchor Positioning | Tooltip with `position-try`, popover menu, annotation callouts, hover-following nav indicator |
-| **F** | `:has()` | Checked-card restyle, form validity states, quantity-aware grid, sibling dimming |
-| **G** | Bonus | `@starting-style` dialog entry animation |
+| Group | Feature                  | Examples                                                                                      |
+| ----- | ------------------------ | --------------------------------------------------------------------------------------------- |
+| **A** | Scroll-Driven Animations | Reading progress bar, reveal on scroll, parallax layers, shrinking sticky header              |
+| **B** | `@property`              | Conic-gradient border, animated integer counter, conic progress ring, gradient sweep          |
+| **C** | Container Queries        | Layout-switching card, fluid `cqi` typography, collapsing toolbar, `style()` stat tile        |
+| **D** | View Transitions         | Filter/sort grid, morphing tab indicator, thumbnail expand, list shuffle                      |
+| **E** | Anchor Positioning       | Tooltip with `position-try`, popover menu, annotation callouts, hover-following nav indicator |
+| **F** | `:has()`                 | Checked-card restyle, form validity states, quantity-aware grid, sibling dimming              |
+| **G** | Bonus                    | `@starting-style` dialog entry animation                                                      |
 
 Every new feature is wrapped in `@supports` with a documented graceful fallback — nothing breaks in an unsupported browser.
 
@@ -108,15 +110,15 @@ Every new feature is wrapped in `@supports` with a documented graceful fallback 
 
 Direction: **sharp-edge, technical, editorial** — engineering drawing meets modern print design.
 
-| Token | Light | Dark |
-|---|---|---|
-| Background | `#F3F1EA` warm bone | `#0E0E0C` near-black |
-| Panel | `#FFFFFF` | `#1C1C19` |
-| Ink (text) | `#111111` | `#E8E5DC` warm off-white |
-| Accent | `#FFFFFF` (on ink surfaces) | `#FFFFFF` |
-| Lime (sparingly) | `#C8FF00` | `#B8ED00` |
-| Border | `1.5px solid #111111` | `1.5px solid #3A3835` |
-| Shadow | `4px 4px 0 ink` | `4px 4px 0 rgba(0,0,0,0.7)` |
+| Token            | Light                       | Dark                        |
+| ---------------- | --------------------------- | --------------------------- |
+| Background       | `#F3F1EA` warm bone         | `#0E0E0C` near-black        |
+| Panel            | `#FFFFFF`                   | `#1C1C19`                   |
+| Ink (text)       | `#111111`                   | `#E8E5DC` warm off-white    |
+| Accent           | `#FFFFFF` (on ink surfaces) | `#FFFFFF`                   |
+| Lime (sparingly) | `#C8FF00`                   | `#B8ED00`                   |
+| Border           | `1.5px solid #111111`       | `1.5px solid #3A3835`       |
+| Shadow           | `4px 4px 0 ink`             | `4px 4px 0 rgba(0,0,0,0.7)` |
 
 - `border-radius: 0` everywhere; chamfered corners via `clip-path polygon()` on selected elements
 - Hard offset shadows (no blur), never glassmorphism
@@ -148,25 +150,25 @@ Direction: **sharp-edge, technical, editorial** — engineering drawing meets mo
 
 This project was built by IBM Bob following this exact prompt by the project author:
 
-> *"Build 'HAIRLINE', a CSS Platform Playground. It is a single-page web app that does two things: (1) showcases many small, well-crafted UI components built with new CSS features — scroll-driven animations, @property, container queries, view transitions, anchor positioning, and :has(). (2) lets visitors read the exact HTML, CSS and JS behind each component, and edit the code live in a playground.*
+> _"Build 'HAIRLINE', a CSS Platform Playground. It is a single-page web app that does two things: (1) showcases many small, well-crafted UI components built with new CSS features — scroll-driven animations, @property, container queries, view transitions, anchor positioning, and :has(). (2) lets visitors read the exact HTML, CSS and JS behind each component, and edit the code live in a playground._
 >
-> *Exactly three files: index.html, styles.css, app.js. No frameworks, no build step, no npm packages, no CDN scripts or CSS libraries. Fonts are the only external resource allowed.*
+> _Exactly three files: index.html, styles.css, app.js. No frameworks, no build step, no npm packages, no CDN scripts or CSS libraries. Fonts are the only external resource allowed._
 >
-> *Every example is rendered as a 'specimen' panel. Single source of truth: the code shown in the tabs and the code running the demo come from the same strings. Inject each example's CSS at document level in its own `<style>` tag. Prefix every class and custom property with the example id.*
+> _Every example is rendered as a 'specimen' panel. Single source of truth: the code shown in the tabs and the code running the demo come from the same strings. Inject each example's CSS at document level in its own `<style>` tag. Prefix every class and custom property with the example id._
 >
-> *Playground: three editable panes, live preview in a sandboxed iframe, horizontally resizable, persist state in URL hash. Show runtime JS errors.*
+> _Playground: three editable panes, live preview in a sandboxed iframe, horizontally resizable, persist state in URL hash. Show runtime JS errors._
 >
-> *Design: sharp-edge, technical, editorial. border-radius 0 everywhere. Hard offset shadows, never blurred. Warm bone background, near-black ink, white accent. Archivo + IBM Plex Mono. Dark mode toggle with localStorage persistence.*
+> _Design: sharp-edge, technical, editorial. border-radius 0 everywhere. Hard offset shadows, never blurred. Warm bone background, near-black ink, white accent. Archivo + IBM Plex Mono. Dark mode toggle with localStorage persistence._
 >
-> *Minimum 24 examples across 6 groups. Every new feature wrapped in @supports with a graceful fallback. Never fake a demo."*
+> _Minimum 24 examples across 6 groups. Every new feature wrapped in @supports with a graceful fallback. Never fake a demo."_
 
 ### What IBM Bob Built
 
-| File | Lines | Responsibility |
-|---|---|---|
-| `index.html` | ~200 | Semantic shell, skip link, header with feature support chips and theme toggle, nav rail, playground markup with pre-overlay editors, footer |
-| `styles.css` | ~1000 | Full design system — `:root` light tokens, `[data-theme="dark"]` dark tokens, all component styles, syntax highlight colour tokens, playground overlay layout, utility classes |
-| `app.js` | ~1250 | § 1 Examples data (25 objects) · § 2 Syntax highlighter (tag-by-token HTML parser, CSS & JS highlighters) · § 3 Render engine · § 4 Tabs & copy · § 5 Playground highlight overlay · § 6 Playground logic · § 7 Support detection · § 8 Nav rail · § 9 Theme toggle · § 10 Init |
+| File         | Lines | Responsibility                                                                                                                                                                                                                                                                  |
+| ------------ | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `index.html` | ~200  | Semantic shell, skip link, header with feature support chips and theme toggle, nav rail, playground markup with pre-overlay editors, footer                                                                                                                                     |
+| `styles.css` | ~1000 | Full design system — `:root` light tokens, `[data-theme="dark"]` dark tokens, all component styles, syntax highlight colour tokens, playground overlay layout, utility classes                                                                                                  |
+| `app.js`     | ~1250 | § 1 Examples data (25 objects) · § 2 Syntax highlighter (tag-by-token HTML parser, CSS & JS highlighters) · § 3 Render engine · § 4 Tabs & copy · § 5 Playground highlight overlay · § 6 Playground logic · § 7 Support detection · § 8 Nav rail · § 9 Theme toggle · § 10 Init |
 
 IBM Bob additionally:
 
@@ -179,24 +181,24 @@ IBM Bob additionally:
 
 ## 🛠 Tech Stack
 
-| Technology | Role |
-|---|---|
-| **HTML5** | Semantic structure — `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>` |
+| Technology                       | Role                                                                                                                                                               |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **HTML5**                        | Semantic structure — `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`                                                                           |
 | **CSS3 (vanilla, no framework)** | Custom properties, `@property`, `@container`, `@supports`, scroll-driven animations, anchor positioning, `:has()`, view transitions, `clip-path`, `conic-gradient` |
-| **Vanilla JavaScript (ES6+)** | DOM rendering, IntersectionObserver, `CSS.supports()`, `CSS.registerProperty()`, `document.startViewTransition()`, `localStorage`, URL hash encode/decode |
+| **Vanilla JavaScript (ES6+)**    | DOM rendering, IntersectionObserver, `CSS.supports()`, `CSS.registerProperty()`, `document.startViewTransition()`, `localStorage`, URL hash encode/decode          |
 
 ---
 
 ## 🌐 Browser Support
 
-| Feature | Chrome | Firefox | Safari | Fallback |
-|---|---|---|---|---|
-| `scroll()` / `view()` timelines | ✓ 115+ | ✓ 110+ | ✓ 17.2+ | Elements static / always-visible |
-| `@property` | ✓ 85+ | ✓ 128+ | ✓ 16.4+ | Static colours / borders |
-| Container queries | ✓ 105+ | ✓ 110+ | ✓ 16+ | Stacked layout always |
-| View Transitions | ✓ 111+ | ✗ (flag) | ✓ 18+ | Instant DOM update, no animation |
-| Anchor positioning | ✓ 125+ | ✗ | ✗ | Static `absolute` positioning |
-| `:has()` | ✓ 105+ | ✓ 121+ | ✓ 15.4+ | No relational styling |
+| Feature                         | Chrome | Firefox  | Safari  | Fallback                         |
+| ------------------------------- | ------ | -------- | ------- | -------------------------------- |
+| `scroll()` / `view()` timelines | ✓ 115+ | ✓ 110+   | ✓ 17.2+ | Elements static / always-visible |
+| `@property`                     | ✓ 85+  | ✓ 128+   | ✓ 16.4+ | Static colours / borders         |
+| Container queries               | ✓ 105+ | ✓ 110+   | ✓ 16+   | Stacked layout always            |
+| View Transitions                | ✓ 111+ | ✗ (flag) | ✓ 18+   | Instant DOM update, no animation |
+| Anchor positioning              | ✓ 125+ | ✗        | ✗       | Static `absolute` positioning    |
+| `:has()`                        | ✓ 105+ | ✓ 121+   | ✓ 15.4+ | No relational styling            |
 
 > Recommended: **Chrome 125+** for the full feature set including anchor positioning.
 
