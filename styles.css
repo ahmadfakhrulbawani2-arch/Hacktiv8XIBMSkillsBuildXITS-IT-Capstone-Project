@@ -89,7 +89,7 @@
   --clr-ink-2: #b8b5ac; /* secondary text */
   --clr-muted: #8a8880; /* muted / placeholder — AA-compliant on dark bg */
   --clr-border: #3a3835; /* visible but not glaring border */
-  --clr-border-sub: #252420; /* subtle divider — darker than panel */
+  --clr-border-sub: #504e45; /* subtle divider — darker than panel */
 
   /* Accent: stays white — used as foreground on ink-coloured surfaces */
   --clr-accent: #ffffff;
@@ -950,18 +950,56 @@ textarea:focus-visible {
   color: var(--clr-bg); /* white label on ink header */
 }
 
-.pg-editor {
-  width: 100%;
+/* Editor wrap: stacking context for textarea + highlight overlay */
+.pg-editor-wrap {
+  position: relative;
   height: 240px;
+  overflow: hidden;
+  background: var(--clr-code-bg);
+}
+
+/* The highlighted <pre> sits behind the textarea, pixel-identical layout */
+.pg-highlight {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: var(--sp-4);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow: hidden; /* pre scrolls via the textarea, not itself */
+  pointer-events: none;
+  tab-size: 2;
+  color: var(--clr-code-ink);
+  background: transparent;
+  border: none;
+  /* Must not clip content that aligns with textarea */
+  box-sizing: border-box;
+}
+
+.pg-editor {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   padding: var(--sp-4);
   font-family: var(--font-mono);
   font-size: 0.72rem;
   line-height: 1.7;
   border: none;
-  background: var(--clr-code-bg);
-  color: var(--clr-code-ink);
+  background: transparent; /* see-through — highlight pre shows behind */
+  color: transparent; /* hide the text; caret remains visible */
+  caret-color: var(--clr-code-ink);
   resize: none;
   display: block;
+  overflow: auto;
+  tab-size: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+  box-sizing: border-box;
+  z-index: 1;
 }
 .pg-editor:focus {
   outline: 2px solid var(--clr-ink) inset;

@@ -453,30 +453,81 @@ function highlightHTML(raw) {
 function highlightHTMLTag(tag) {
   // Handle comments
   if (/^<!--/.test(tag)) {
-    return '<span class="hl-comment">' + escapeHtml(tag) + "</span>";
+    return '<span class="hl-comment">' + escapeHtml(tag) + '</span>';
   }
-  // Escape the whole tag first, then re-highlight its parts
-  var s = escapeHtml(tag);
-  // Opening/closing punctuation + tag name
-  s = s.replace(
-    /^(&lt;\/?)([\w-]+)/,
-    '<span class="hl-punct">$1</span><span class="hl-tag">$2</span>',
-  );
-  // Closing > or />
-  s = s.replace(/(\/?&gt;)$/, '<span class="hl-punct">$1</span>');
-  // Attribute names (word= pattern, confined to this tag only)
-  s = s.replace(/\s([\w-]+)(=)/g, ' <span class="hl-attr">$1</span>$2');
-  // Attribute values (&quot;...&quot; or single-quoted)
-  s = s.replace(
-    /=(&quot;[^&]*?&quot;|'[^']*?')/g,
-    '=<span class="hl-string">$1</span>',
-  );
-  // Boolean attributes (no value, e.g. hidden, disabled, required)
-  s = s.replace(
-    /\s([\w-]+)(?=\s|<span class="hl-punct">)/g,
-    ' <span class="hl-attr">$1</span>',
-  );
-  return s;
+
+  // Work on the RAW tag string (before any HTML-escaping) so we don't have
+  // to fight with &quot; entities mid-regex. We build the highlighted string
+  // piece by piece, HTML-escaping every literal piece as we emit it.
+
+  // Parse the tag manually into: opening-punct, tagname, attrs-string, closing-punct
+  // e.g.  <button class="foo" disabled>
+  //        ^------  ------^  ^-------^ ^
+  var closingSlashOpen = tag.startsWith('</');
+  var selfClose        = tag.endsWith('/>');
+
+  // Strip the outer < > (and optional / before tagname or before >)
+  var inner = tag.slice(closingSlashOpen ? 2 : 1, selfClose ? tag.length - 2 : tag.length - 1);
+  // inner is now e.g. 'button class="foo" disabled' or 'button'
+
+  // Pull the tag name off the front
+  var nameMatch = inner.match(/^([\w-]+)([\s\S]*)$/);
+  if (!nameMatch) {
+    // Fallback: just escape and return
+    return escapeHtml(tag);
+  }
+  var tagName  = nameMatch[1];
+  var attrStr  = nameMatch[2]; // everything after the tag name
+
+  // Build output string
+  var out = '';
+
+  // Opening punctuation  < or </
+  out += '<span class="hl-punct">' + (closingSlashOpen ? '&lt;/' : '&lt;') + '</span>';
+  // Tag name
+  out += '<span class="hl-tag">' + escapeHtml(tagName) + '</span>';
+
+  // Parse the attribute string token by token
+  // Each iteration consumes one attribute (name, name=value) or whitespace
+  var rest = attrStr;
+  while (rest.length > 0) {
+    // Leading whitespace — emit as-is
+    var wsMatch = rest.match(/^(\s+)/);
+    if (wsMatch) {
+      out  += wsMatch[1];
+      rest  = rest.slice(wsMatch[1].length);
+      continue;
+    }
+
+    // attr="value" or attr='value'
+    var avDQ = rest.match(/^([\w-]+)(=)("(?:[^"\\]|\\.)*")/);
+    var avSQ = rest.match(/^([\w-]+)(=)('(?:[^'\\]|\\.)*')/);
+    var avMatch = avDQ || avSQ;
+    if (avMatch) {
+      out  += '<span class="hl-attr">' + escapeHtml(avMatch[1]) + '</span>';
+      out  += '=';
+      out  += '<span class="hl-string">' + escapeHtml(avMatch[3]) + '</span>';
+      rest  = rest.slice(avMatch[0].length);
+      continue;
+    }
+
+    // Boolean attribute (no value)
+    var boolMatch = rest.match(/^([\w-]+)/);
+    if (boolMatch) {
+      out  += '<span class="hl-attr">' + escapeHtml(boolMatch[1]) + '</span>';
+      rest  = rest.slice(boolMatch[1].length);
+      continue;
+    }
+
+    // Anything else (stray = sign, etc.) — escape and skip one char
+    out  += escapeHtml(rest.charAt(0));
+    rest  = rest.slice(1);
+  }
+
+  // Closing punctuation  > or />
+  out += '<span class="hl-punct">' + (selfClose ? '/&gt;' : '&gt;') + '</span>';
+
+  return out;
 }
 
 function highlightJS(raw) {
@@ -791,6 +842,71 @@ function findExample(id) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   § 5 · PLAYGROUND SYNTAX HIGHLIGHT OVERLAY
+   ══════════════════════════════════════════════════════════════════════════
+   Technique: a <pre class="pg-highlight"> sits absolutely behind each
+   transparent textarea. On every keystroke the textarea value is run through
+   the same highlight() function used by the specimen tabs, and the result is
+   set as the pre's innerHTML. Scroll is mirrored so the two stay in sync.
+*/
+
+var PG_PANES = [
+  { textareaId: 'pg-html', preId: 'pg-highlight-html', lang: 'html' },
+  { textareaId: 'pg-css',  preId: 'pg-highlight-css',  lang: 'css'  },
+  { textareaId: 'pg-js',   preId: 'pg-highlight-js',   lang: 'js'   },
+];
+
+function refreshHighlight(pane) {
+  var ta  = document.getElementById(pane.textareaId);
+  var pre = document.getElementById(pane.preId);
+  if (!ta || !pre) return;
+  // highlight() already HTML-escapes and wraps in spans
+  var highlighted = highlight(ta.value, pane.lang);
+  // Append a trailing newline so the last line always has full line-height
+  pre.innerHTML = highlighted + '\n';
+  // Mirror scroll position
+  pre.scrollTop  = ta.scrollTop;
+  pre.scrollLeft = ta.scrollLeft;
+}
+
+function refreshAllHighlights() {
+  PG_PANES.forEach(refreshHighlight);
+}
+
+function initPlaygroundHighlight() {
+  PG_PANES.forEach(function(pane) {
+    var ta  = document.getElementById(pane.textareaId);
+    var pre = document.getElementById(pane.preId);
+    if (!ta || !pre) return;
+
+    // Update highlight on every keystroke
+    ta.addEventListener('input', function() {
+      refreshHighlight(pane);
+    });
+
+    // Sync scroll: when the user scrolls the textarea, move the pre too
+    ta.addEventListener('scroll', function() {
+      pre.scrollTop  = ta.scrollTop;
+      pre.scrollLeft = ta.scrollLeft;
+    });
+
+    // Tab key: insert two spaces instead of losing focus
+    ta.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        var start = ta.selectionStart;
+        var end   = ta.selectionEnd;
+        var val   = ta.value;
+        ta.value = val.slice(0, start) + '  ' + val.slice(end);
+        ta.selectionStart = ta.selectionEnd = start + 2;
+        refreshHighlight(pane);
+        debouncedRender();
+      }
+    });
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    § 5 · PLAYGROUND
    ══════════════════════════════════════════════════════════════════════════ */
 
@@ -812,8 +928,10 @@ function getPlaygroundCode() {
 
 function setPlaygroundCode(code) {
   document.getElementById("pg-html").value = code.html;
-  document.getElementById("pg-css").value = code.css;
-  document.getElementById("pg-js").value = code.js;
+  document.getElementById("pg-css").value  = code.css;
+  document.getElementById("pg-js").value   = code.js;
+  // Refresh the syntax highlight overlays after programmatic value change
+  refreshAllHighlights();
 }
 
 function buildSrcdoc(code) {
@@ -1206,15 +1324,19 @@ document.addEventListener("DOMContentLoaded", function () {
   buildNavRail();
   initNavHighlight();
 
-  // 6. Playground
+  // 6. Playground highlight overlay (must come before initPlayground so
+  //    listeners exist when setPlaygroundCode calls refreshAllHighlights)
+  initPlaygroundHighlight();
+
+  // 7. Playground logic (loads initial code + fires first highlight)
   initPlayground();
 
-  // 7. Support chips
+  // 8. Support chips
   renderSupportChips();
 
-  // 8. Reading progress bar (scroll-driven)
+  // 9. Reading progress bar (scroll-driven)
   injectReadingProgressBar();
 
-  // 9. Theme toggle
+  // 10. Theme toggle
   initThemeToggle();
 });
