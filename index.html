@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HAIRLINE — CSS Platform Playground</title>
+    <meta
+      name="description"
+      content="A living reference for modern CSS: scroll-driven animations, @property, container queries, view transitions, anchor positioning, and :has()."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+    <header class="site-header" role="banner">
+      <div class="site-header__inner">
+        <div class="site-header__brand">
+          <span class="site-header__registration" aria-hidden="true"></span>
+          <div>
+            <h1 class="site-header__title">HAIRLINE</h1>
+            <p class="site-header__pitch">
+              A CSS Platform Playground — modern features, zero dependencies,
+              real code.
+            </p>
+          </div>
+        </div>
+        <div
+          class="site-header__support"
+          id="support-row"
+          aria-label="Feature support status"
+        >
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+    </header>
+
+    <!-- ═══════════════════════════════ BODY LAYOUT ════════════════════════════ -->
+    <div class="site-layout">
+      <!-- NAV RAIL -->
+      <nav class="nav-rail" id="nav-rail" aria-label="Example index">
+        <div class="nav-rail__inner">
+          <div class="nav-rail__label" aria-hidden="true">INDEX</div>
+          <div id="nav-groups">
+            <!-- Populated by app.js -->
+          </div>
+        </div>
+      </nav>
+
+      <!-- MAIN CONTENT -->
+      <main id="main" class="site-main">
+        <!-- CROSS MARKS decoration -->
+        <span class="deco-cross deco-cross--tl" aria-hidden="true"></span>
+        <span class="deco-cross deco-cross--tr" aria-hidden="true"></span>
+
+        <!-- PLAYGROUND -->
+        <section
+          class="playground-section"
+          id="playground"
+          aria-labelledby="playground-heading"
+        >
+          <div class="section-header">
+            <span class="section-header__index" aria-hidden="true">PG</span>
+            <h2 class="section-header__title" id="playground-heading">
+              Playground
+            </h2>
+            <p class="section-header__desc">
+              Edit HTML, CSS and JS live. Drag the preview edge to test
+              container queries.
+            </p>
+          </div>
+
+          <div class="playground-toolbar">
+            <label for="pg-load" class="pg-label">LOAD EXAMPLE</label>
+            <select
+              id="pg-load"
+              class="pg-select"
+              aria-label="Load example into playground"
+            >
+              <option value="">— choose —</option>
+            </select>
+            <button class="pg-btn" id="pg-reset" type="button">Reset</button>
+            <button class="pg-btn" id="pg-copy-all" type="button">
+              Copy all
+            </button>
+            <a
+              class="pg-btn pg-btn--share"
+              id="pg-share"
+              href="#"
+              aria-label="Share playground state"
+              >Share ↗</a
+            >
+          </div>
+
+          <div class="playground-editors">
+            <div class="pg-pane">
+              <div class="pg-pane__header">
+                <span class="pg-pane__lang">HTML</span>
+              </div>
+              <textarea
+                id="pg-html"
+                class="pg-editor"
+                spellcheck="false"
+                autocorrect="off"
+                autocapitalize="off"
+                aria-label="HTML editor"
+              ></textarea>
+            </div>
+            <div class="pg-pane">
+              <div class="pg-pane__header">
+                <span class="pg-pane__lang">CSS</span>
+              </div>
+              <textarea
+                id="pg-css"
+                class="pg-editor"
+                spellcheck="false"
+                autocorrect="off"
+                autocapitalize="off"
+                aria-label="CSS editor"
+              ></textarea>
+            </div>
+            <div class="pg-pane">
+              <div class="pg-pane__header">
+                <span class="pg-pane__lang">JS</span>
+              </div>
+              <textarea
+                id="pg-js"
+                class="pg-editor"
+                spellcheck="false"
+                autocorrect="off"
+                autocapitalize="off"
+                aria-label="JS editor"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="playground-preview-wrap">
+            <div class="pg-preview-label" aria-hidden="true">
+              PREVIEW — drag right edge to resize
+            </div>
+            <div class="playground-resizable" id="pg-resizable">
+              <iframe
+                id="pg-frame"
+                title="Playground preview"
+                sandbox="allow-scripts allow-same-origin"
+              ></iframe>
+            </div>
+          </div>
+
+          <div
+            class="pg-error-strip"
+            id="pg-error"
+            role="alert"
+            aria-live="polite"
+            hidden
+          ></div>
+        </section>
+
+        <!-- EXAMPLES -->
+        <div id="examples-root">
+          <!-- Populated by app.js -->
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="site-footer" role="contentinfo">
+          <div class="site-footer__inner">
+            <span class="site-footer__mark" aria-hidden="true">◼</span>
+            <span class="site-footer__text"
+              >HAIRLINE — CSS Platform Playground &nbsp;·&nbsp; Built with zero
+              dependencies &nbsp;·&nbsp; 2026</span
+            >
+          </div>
+        </footer>
+      </main>
+    </div>
+    <!-- /.site-layout -->
+
+    <script src="app.js"></script>
+  </body>
+</html>
